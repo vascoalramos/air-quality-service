@@ -1,4 +1,4 @@
-package tqs.homework.airquality.service;
+package tqs.homework.airquality;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +10,7 @@ import org.mockito.internal.verification.VerificationModeFactory;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tqs.homework.airquality.model.City;
 import tqs.homework.airquality.repository.CityRepository;
+import tqs.homework.airquality.service.CityService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,22 +37,23 @@ public class CityServiceTest {
     }
 
     @Test
-    void whenNonExistingName_thenCityShouldNotExist() {
+    public void whenValidName_thenCityShouldBeFound() {
+        String name = "Viseu";
+        City found = cityService.getCityDetails(name);
+        assertThat(found.getName()).isEqualTo(name);
+    }
+
+    @Test
+    public void whenNonExistingName_thenCityShouldNotExist() {
         String name = "ABC";
         City found = cityService.getCityDetails(name);
         assertThat(found).isNull();
         verifyFindByNameIsCalledOnce(name);
     }
 
-    private void verifyFindByNameIsCalledOnce(String name) {
+    @Test
+    public void verifyFindByNameIsCalledOnce(String name) {
         Mockito.verify(cityRepository, VerificationModeFactory.times(1)).findCityByName(name);
         Mockito.reset(cityRepository);
-    }
-
-    @Test
-    void getCityDetails() {
-        String name = "mustang";
-        City found = cityService.getCityDetails(name);
-        assertThat(found.getName()).isEqualTo(name);
     }
 }
