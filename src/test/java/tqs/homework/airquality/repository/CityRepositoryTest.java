@@ -6,9 +6,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import tqs.homework.airquality.model.City;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
@@ -52,6 +54,36 @@ public class CityRepositoryTest {
     @Test
     void whenInvalidName_thenReturnNull() {
         City found = cityRepository.findCityByName("Invalid City");
+        assertNull(found);
+    }
+
+    @Test
+    void whenFindByCountry_thenReturnCar() {
+        City viseu = new City(123, "Viseu", "PT", "Portugal");
+        entityManager.persistAndFlush(viseu);
+
+        List<City> found = cityRepository.findCitiesByCountry(viseu.getCountry());
+        assertNotNull((found));
+    }
+
+    @Test
+    void whenInvalidCountry_thenReturnNull() {
+        List<City> found = cityRepository.findCitiesByCountry("Invalid Country");
+        assertNull(found);
+    }
+
+    @Test
+    void whenFindByCountryCode_thenReturnCar() {
+        City viseu = new City(123, "Viseu", "PT", "Portugal");
+        entityManager.persistAndFlush(viseu);
+
+        List<City> found = cityRepository.findCitiesByCountryCode(viseu.getCountryCode());
+        assertNotNull((found));
+    }
+
+    @Test
+    void whenInvalidCountryCode_thenReturnNull() {
+        List<City> found = cityRepository.findCitiesByCountryCode("Invalid Code");
         assertNull(found);
     }
 
