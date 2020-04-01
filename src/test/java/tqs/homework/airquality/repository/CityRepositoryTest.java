@@ -36,8 +36,23 @@ public class CityRepositoryTest {
 
     @Test
     void whenInvalidId_thenReturnNull() {
-        Optional<City> found = cityRepository.findById(Long.valueOf(2));
+        Optional<City> found = cityRepository.findById(2L);
         assertNull(found.get());
+    }
+
+    @Test
+    void whenFindByName_thenReturnCar() {
+        City viseu = new City(123, "Viseu", "PT", "Portugal");
+        entityManager.persistAndFlush(viseu);
+
+        City found = cityRepository.findCityByName(viseu.getName());
+        assertThat((found.getName())).isEqualTo(viseu.getName());
+    }
+
+    @Test
+    void whenInvalidName_thenReturnNull() {
+        City found = cityRepository.findCityByName("Invalid City");
+        assertNull(found);
     }
 
 }
