@@ -38,20 +38,15 @@ public class CityServiceTest {
     @Test
     void whenValidName_thenCityShouldBeFound() {
         String name = "mustang";
-
         City found = cityService.getCityDetails(name);
-
         assertThat(found.getName()).isEqualTo(name);
     }
 
     @Test
     void whenNonExistingName_thenCityShouldNotExist() {
         String name = "ABC";
-
         City found = cityService.getCityDetails(name);
-
         assertThat(found).isNull();
-
         verifyFindByNameIsCalledOnce(name);
     }
 
