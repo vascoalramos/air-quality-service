@@ -9,13 +9,7 @@ variables:
 
 
 stages:
- # - Test
   - Analysis
-
-test:
-  stage: Test
-  script:
-    - mvn test
 
 sonarqube-check:
   stage: Analysis
