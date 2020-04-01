@@ -1,7 +1,7 @@
 image: maven:3.6.3-jdk-11
 
 variables:
-  PROJECT_KEY: "Air Quality Service"
+  PROJECT_KEY: "air-quality-service"
   SONAR_TOKEN: "b3c05d385f6d359c36cb4d2de9e8631a9edef0bf"
   SONAR_HOST_URL: "https://sonarcloud.io/"
   GIT_DEPTH: 0
