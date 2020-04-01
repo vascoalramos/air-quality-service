@@ -9,7 +9,7 @@ variables:
 
 
 stages:
-  - Test
+ # - Test
   - Analysis
 
 test:
