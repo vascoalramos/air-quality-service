@@ -14,7 +14,8 @@ stages:
 sonarqube-check:
   stage: Analysis
   script:
-    - mvn sonar:sonar -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.host.url=${SONAR_HOST_URL}
+    - mvn verify sonar:sonar -Dmaven.test.skip=true
+          -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.host.url=${SONAR_HOST_URL}
           -Dsonar.login=${SONAR_TOKEN} -Dsonar.organization=${ORGANIZATION}
           -Dsonar.qualitygate.wait=true
   allow_failure: true
