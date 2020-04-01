@@ -1,8 +1,6 @@
 HELP.md
 target/
-!.mvn/wrapper/
-!**/src/main/**
-!**/src/test/**
+.mvn/wrapper/
 
 ### STS ###
 .apt_generated
