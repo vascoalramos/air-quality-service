@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tqs.homework.airquality.model.City;
 import tqs.homework.airquality.repository.CityRepository;
-import tqs.homework.airquality.utils.CSVReader;
 
 import java.util.List;
 
