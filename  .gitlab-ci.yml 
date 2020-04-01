@@ -1,7 +1,0 @@
-stages:
-    - Test
-
-test:
-    stage: Test
-    script:
-        - mvn test
