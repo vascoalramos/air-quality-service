@@ -18,6 +18,6 @@ public class CityService {
     private CityRepository cityRepository;
 
     public City getCityDetails(String name) {
-        return cityRepository.findCityByName(name);
+        return cityRepository.findByName(name);
     }
 }

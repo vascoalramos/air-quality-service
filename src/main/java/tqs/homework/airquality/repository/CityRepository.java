@@ -15,9 +15,13 @@ import java.util.List;
 @Repository
 public interface CityRepository extends JpaRepository<City, Long> {
 
-    City findCityByName(String name);
+    City findByCityId(long id);
 
-    List<City> findCitiesByCountry(String country);
+    City findByName(String name);
 
-    List<City> findCitiesByCountryCode(String countryCode);
+    List<City> findCitiesByName(String name);
+
+    List<City> findByCountry(String country);
+
+    List<City> findByCountryCode(String countryCode);
 }

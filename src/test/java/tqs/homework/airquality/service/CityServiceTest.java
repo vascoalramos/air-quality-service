@@ -1,4 +1,4 @@
-package tqs.homework.airquality;
+package tqs.homework.airquality.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class CityServiceTest {
     @BeforeEach
     public void setUp() {
         City viseu = new City(123, "Viseu", "PT", "Portugal");
-        Mockito.when(cityRepository.findCityByName(viseu.getName())).thenReturn(viseu);
+        Mockito.when(cityRepository.findByName(viseu.getName())).thenReturn(viseu);
     }
 
     @Test
@@ -51,9 +51,8 @@ public class CityServiceTest {
         verifyFindByNameIsCalledOnce(name);
     }
 
-    @Test
-    public void verifyFindByNameIsCalledOnce(String name) {
-        Mockito.verify(cityRepository, VerificationModeFactory.times(1)).findCityByName(name);
+    private void verifyFindByNameIsCalledOnce(String name) {
+        Mockito.verify(cityRepository, VerificationModeFactory.times(1)).findByName(name);
         Mockito.reset(cityRepository);
     }
 }
