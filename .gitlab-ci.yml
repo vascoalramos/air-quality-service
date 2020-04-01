@@ -1,13 +1,16 @@
 image: maven:latest
 
 variables:
+  PROJECT_KEY: "Air Quality Service"
   SONAR_TOKEN: "b3c05d385f6d359c36cb4d2de9e8631a9edef0bf"
   SONAR_HOST_URL: "https://sonarcloud.io/"
   GIT_DEPTH: 0
+  ORGANIZATION: "vasco"
 
 
 stages:
   - Test
+  - Analysis
 
 test:
   stage: Test
@@ -15,9 +18,10 @@ test:
     - mvn test
 
 sonarqube-check:
-  stage: Test
+  stage: Analysis
   script:
-    - mvn verify sonar:sonar -Dsonar.qualitygate.wait=true
+    - mvn sonar:sonar -Dsonar.qualitygate.wait=true -Dsonar.projectKey=${PROJECT_KEY}
+        -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_HOST_URL} -Dsonar.organization=${ORGANIZATION}
   allow_failure: true
   only:
     - merge_requests
