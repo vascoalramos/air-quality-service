@@ -1,8 +1,24 @@
+image: maven:latest
+
+variables:
+  SONAR_TOKEN: "b3c05d385f6d359c36cb4d2de9e8631a9edef0bf"
+  SONAR_HOST_URL: "https://sonarcloud.io/"
+  GIT_DEPTH: 0
+
+
 stages:
   - Test
 
 test:
   stage: Test
-  image: maven:latest
   script:
     - mvn test
+
+sonarqube-check:
+  stage: Test
+  script:
+    - mvn verify sonar:sonar -Dsonar.qualitygate.wait=true
+    allow_failure: true
+    only:
+      - merge_requests
+      - master
