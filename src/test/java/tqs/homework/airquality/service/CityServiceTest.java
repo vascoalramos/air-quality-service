@@ -36,13 +36,6 @@ public class CityServiceTest {
     }
 
     @Test
-    void whenValidName_thenCityShouldBeFound() {
-        String name = "mustang";
-        City found = cityService.getCityDetails(name);
-        assertThat(found.getName()).isEqualTo(name);
-    }
-
-    @Test
     void whenNonExistingName_thenCityShouldNotExist() {
         String name = "ABC";
         City found = cityService.getCityDetails(name);
@@ -53,5 +46,12 @@ public class CityServiceTest {
     private void verifyFindByNameIsCalledOnce(String name) {
         Mockito.verify(cityRepository, VerificationModeFactory.times(1)).findCityByName(name);
         Mockito.reset(cityRepository);
+    }
+
+    @Test
+    void getCityDetails() {
+        String name = "mustang";
+        City found = cityService.getCityDetails(name);
+        assertThat(found.getName()).isEqualTo(name);
     }
 }
