@@ -21,7 +21,7 @@ sonarqube-check:
   stage: Analysis
   script:
     - mvn sonar:sonar -Dsonar.qualitygate.wait=true -Dsonar.projectKey=${PROJECT_KEY}
-        -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_HOST_URL} -Dsonar.organization=${ORGANIZATION}
+        -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_TOKEN} -Dsonar.organization=${ORGANIZATION}
   allow_failure: true
   only:
     - merge_requests
