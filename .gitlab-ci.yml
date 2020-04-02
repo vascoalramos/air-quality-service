@@ -9,8 +9,8 @@ variables:
 
 
 stages:
-  - Analysis
   - Test
+  - Analysis
 
 test:
   stage: Test
