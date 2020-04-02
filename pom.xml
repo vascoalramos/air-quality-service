@@ -80,11 +80,17 @@
                 <version>0.8.5</version>
                 <executions>
                     <execution>
-                        <id>report</id>
                         <goals>
-                            <goal>report-aggregate</goal>
+                            <goal>prepare-agent</goal>
                         </goals>
-                        <phase>verify</phase>
+                    </execution>
+                    <!-- attached to Maven test phase -->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
