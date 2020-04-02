@@ -17,18 +17,15 @@ import java.util.List;
 
 @RestController
 public class CityController {
-
     @Autowired
     private CityService cityService;
 
-
     @GetMapping("/cities")
     public List<City> getAllCities(@RequestParam(value = "q", required = false) String query) {
-        if (query.isEmpty()) {
+        if (query == null) {
             return cityService.getAllCities();
         }
         return cityService.getCitiesContains(query);
-
     }
 
 }
