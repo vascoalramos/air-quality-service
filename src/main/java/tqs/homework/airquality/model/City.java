@@ -38,9 +38,4 @@ public class City {
         this.countryCode = countryCode;
         this.country = country;
     }
-
-    @Override
-    public String toString() {
-        return "City{" + "cityId=" + cityId + ", name='" + name + '\'' + ", countryCode='" + countryCode + '\'' + ", country='" + country + '\'' + '}';
-    }
 }
