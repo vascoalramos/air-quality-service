@@ -2,9 +2,10 @@ package tqs.homework.airquality.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tqs.homework.airquality.model.City;
-import tqs.homework.airquality.repository.CityRepository;
+import tqs.homework.airquality.service.CityService;
 
 import java.util.List;
 
@@ -18,12 +19,16 @@ import java.util.List;
 public class CityController {
 
     @Autowired
-    private CityRepository cityRepository;
+    private CityService cityService;
 
 
     @GetMapping("/cities")
-    public List<City> getAllCities() {
-        return cityRepository.findAll();
+    public List<City> getAllCities(@RequestParam(value = "q", required = false) String query) {
+        if (query.isEmpty()) {
+            return cityService.getAllCities();
+        }
+        return cityService.getCitiesContains(query);
+
     }
 
 }

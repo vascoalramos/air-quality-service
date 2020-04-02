@@ -1,9 +1,6 @@
 package tqs.homework.airquality.repository;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -11,10 +8,8 @@ import tqs.homework.airquality.model.City;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Vasco Ramos
@@ -31,7 +26,7 @@ public class CityRepositoryTest {
     private TestEntityManager entityManager;
 
     @Test
-    public void whenFindById_thenReturnCar() {
+    public void whenFindById_thenReturnCity() {
         City viseu = new City(123, "Viseu", "PT", "Portugal");
         entityManager.persistAndFlush(viseu);
 
@@ -42,11 +37,11 @@ public class CityRepositoryTest {
     @Test
     public void whenInvalidId_thenReturnNull() {
         City found = cityRepository.findByCityId(2L);
-        assertNull(found);
+        assertThat(found).isNull();
     }
 
     @Test
-    public void whenFindByName_thenReturnCar() {
+    public void whenFindByName_thenReturnCity() {
         City city = new City(123, "Canas de Senhorim", "PT", "Portugal");
         entityManager.persistAndFlush(city);
 
@@ -57,16 +52,16 @@ public class CityRepositoryTest {
     @Test
     public void whenInvalidName_thenReturnNull() {
         City found = cityRepository.findByName("Invalid City");
-        assertNull(found);
+        assertThat(found).isNull();
     }
 
     @Test
-    public void whenFindByCountry_thenReturnCar() {
+    public void whenFindByCountry_thenReturnCityList() {
         City viseu = new City(123, "Viseu", "PT", "Portugal");
         entityManager.persistAndFlush(viseu);
 
         List<City> found = cityRepository.findByCountry(viseu.getCountry());
-        assertNotNull(found);
+        assertThat(found).isNotNull();
     }
 
     @Test
@@ -76,18 +71,32 @@ public class CityRepositoryTest {
     }
 
     @Test
-    public void whenFindByCountryCode_thenReturnCar() {
+    public void whenFindByCountryCode_thenReturnCityList() {
         City viseu = new City(123, "Viseu", "PT", "Portugal");
         entityManager.persistAndFlush(viseu);
 
         List<City> found = cityRepository.findByCountryCode(viseu.getCountryCode());
-        assertNotNull(found);
+        assertThat(found).isNotNull();
     }
 
     @Test
     public void whenInvalidCountryCode_thenReturnNull() {
         List<City> found = cityRepository.findByCountryCode("Invalid Code");
-        assertThat(found).isEqualTo(new ArrayList<City>());
+        assertThat(found).isEmpty();
+    }
+
+    @Test
+    public void whenFindByNameContains_thenReturnCityList() {
+        City viseu = new City(123, "Viseu", "PT", "Portugal");
+        entityManager.persistAndFlush(viseu);
+        List<City> found = cityRepository.findCitiesByNameContainsIgnoreCase("vise");
+        assertThat(found).isNotNull();
+    }
+
+    @Test
+    public void whenInvalidNamePart_thenReturnNull() {
+        List<City> found = cityRepository.findCitiesByNameContainsIgnoreCase("1232");
+        assertThat(found).isEmpty();
     }
 
 }

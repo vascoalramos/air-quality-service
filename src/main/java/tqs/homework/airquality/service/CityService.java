@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import tqs.homework.airquality.model.City;
 import tqs.homework.airquality.repository.CityRepository;
 
+import java.util.List;
+
 /**
  * @author Vasco Ramos
  * @date 01/04/20
@@ -19,5 +21,13 @@ public class CityService {
 
     public City getCityDetails(String name) {
         return cityRepository.findByName(name);
+    }
+
+    public List<City> getCitiesContains(String name) {
+        return cityRepository.findCitiesByNameContainsIgnoreCase(name);
+    }
+
+    public List<City> getAllCities() {
+        return cityRepository.findAll();
     }
 }

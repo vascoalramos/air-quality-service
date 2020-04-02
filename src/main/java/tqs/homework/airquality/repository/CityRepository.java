@@ -22,4 +22,6 @@ public interface CityRepository extends JpaRepository<City, Long> {
     List<City> findByCountry(String country);
 
     List<City> findByCountryCode(String countryCode);
+
+    List<City> findCitiesByNameContainsIgnoreCase(String q);
 }

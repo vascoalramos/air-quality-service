@@ -11,6 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import tqs.homework.airquality.model.City;
 import tqs.homework.airquality.repository.CityRepository;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -53,5 +55,25 @@ public class CityServiceTest {
     private void verifyFindByNameIsCalledOnce(String name) {
         Mockito.verify(cityRepository, VerificationModeFactory.times(1)).findByName(name);
         Mockito.reset(cityRepository);
+    }
+
+    @Test
+    public void whenGetCities_thenShouldReturnList() {
+        List<City> found = cityService.getAllCities();
+        assertThat(found).isNotNull();
+    }
+
+    @Test
+    public void whenValidNamePart_thenCitiesShouldBeFound() {
+        String name = "vise";
+        List<City> found = cityService.getCitiesContains(name);
+        assertThat(found).isNotNull();
+    }
+
+    @Test
+    public void whenInvalidNamePart_thenCitiesShouldNotExist() {
+        String name = "1231_q";
+        List<City> found = cityService.getCitiesContains(name);
+        assertThat(found).isEmpty();
     }
 }
