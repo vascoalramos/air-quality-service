@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Spring Boot Thymeleaf Application - Bootstrap Autocomplete</title>
 
-    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} " th:rel="stylesheet"/>
 </head>
 <body>
 
@@ -12,9 +12,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
         <a class="navbar-brand" href="/">Thymeleaf - Bootstrap Autocomplete</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
+        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-target="#navbarResponsive"
+                data-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -39,10 +39,10 @@
 </nav>
 
 <div class="container">
-    <h2 class="mt-5">Your place of birth: <strong th:text="${birthplace.state.label}"
-                                                  th:if="${birthplace.state != null}"></strong></h2>
+    <h2 class="mt-5">Your place of birth: <strong th:if="${birthplace.state != null}"
+                                                  th:text="${birthplace.state.label}"></strong></h2>
 
-    <a th:href="@{/}" class="btn btn-primary">Go back</a>
+    <a class="btn btn-primary" th:href="@{/}">Go back</a>
 </div>
 
 </body>

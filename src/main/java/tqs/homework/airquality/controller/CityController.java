@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 public class CityController {
 
-    private CityCollection cityCollection =new CityCollection();
+    private CityCollection cityCollection = new CityCollection();
 
 
     @GetMapping("/cities")
