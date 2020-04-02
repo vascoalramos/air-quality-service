@@ -28,9 +28,7 @@ public class City {
     @Column
     private String country;
 
-    public City() {
-
-    }
+    public City() { }
 
     public City(long cityId, String name, String countryCode, String country) {
         this.cityId = cityId;
