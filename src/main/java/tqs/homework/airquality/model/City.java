@@ -6,14 +6,14 @@ package tqs.homework.airquality.model;
  * @time 17:35
  */
 
-public class City {
-    private long cityId;
+public class City implements Comparable<City> {
+    private long id;
     private String name;
     private String countryCode;
     private String country;
 
     public City(long cityId, String name, String countryCode, String country) {
-        this.cityId = cityId;
+        this.id = cityId;
         this.name = name;
         this.countryCode = countryCode;
         this.country = country;
@@ -27,11 +27,16 @@ public class City {
         return countryCode;
     }
 
-    public String getName() {
-        return name;
+    public String getText() {
+        return name + ", " + country;
     }
 
-    public long getCityId() {
-        return cityId;
+    public long getId() {
+        return id;
+    }
+
+    @Override
+    public int compareTo(City city) {
+        return this.name.compareToIgnoreCase(city.name);
     }
 }

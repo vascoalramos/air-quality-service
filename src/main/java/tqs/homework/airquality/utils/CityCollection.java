@@ -27,7 +27,7 @@ public class CityCollection {
     public List<City> getCitiesContains(String query) {
         String finalQuery = query.toLowerCase();
         return this.cities.stream()
-                .filter(city -> city.getName().toLowerCase().contains(finalQuery))
+                .filter(city -> city.getText().toLowerCase().contains(finalQuery))
                 .limit(15)
                 .collect(Collectors.toList());
     }

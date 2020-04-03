@@ -6,7 +6,7 @@
 
     <link th:href="@{assets/select2-develop/dist/css/select2.css}" th:rel="stylesheet"/>
     <link th:href="@{assets/select2-bootstrap4-theme-master/dist/select2-bootstrap4.css}" th:rel="stylesheet"/>
-    <link th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} " th:rel="stylesheet"/>
+    <link th:href="@{webjars/bootstrap/4.4.1-1/css/bootstrap.min.css} " th:rel="stylesheet"/>
 
 </head>
 <body>
@@ -14,10 +14,9 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-        <a class="navbar-brand" href="/">Thymeleaf - Bootstrap Autocomplete</a>
-        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
-                data-target="#navbarResponsive"
-                data-toggle="collapse" type="button">
+        <a class="navbar-brand" href="/">Air Quality App</a>
+        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler" data-target="#navbarResponsive" data-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -45,12 +44,12 @@
 
     <div class="row">
         <div class="col-md-4 mt-5">
-            <form method="post" th:object="${birthplace}">
+            <form method="post">
 
                 <div class="form-group">
-                    <label for="birthplace">Place of birth</label>
-                    <select class="form-control select2-single" id="birthplace" th:field="*{state}">
-                        <option value="">Search state</option>
+                    <label for="birthplace"></label>
+                    <select class="form-control select2-single" id="birthplace">
+                        <option value="">Search city</option>
                     </select>
                 </div>
 
@@ -71,10 +70,11 @@
     $("#birthplace").select2({
         theme: "bootstrap4",
         ajax: {
-            url: '/states',
+            url: '/api/cities',
             dataType: 'json',
             delay: 250,
             processResults: function (response) {
+                console.log(response);
                 return {
                     results: response
                 };
