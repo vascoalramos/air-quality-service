@@ -23,48 +23,18 @@
 </nav>
 
 <div class="container">
+    <h2 class="mt-5">City ID: <strong th:text="${city_id}"></strong></h2>
 
-    <div class="row">
-        <div class="col-md-12 mt-5">
-            <form method="post" th:object="${city}">
-
-                <div class="form-group">
-                    <label for="city"></label>
-                    <select class="form-control select2-single" id="city" th:field="*{text}">
-                        <option value="">Search city</option>
-                    </select>
-                </div>
-
-                <div class="text-center">
-                    <button class="btn btn-primary" type="submit">Submit form</button>
-                </div>
-
-            </form>
-        </div>
-    </div>
-
+    <a class="btn btn-primary" th:href="@{/}">Go back</a>
 </div>
-
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{assets/select2-develop/dist/js/select2.full.js}"></script>
 
 <script>
-    $("#city").select2({
-        theme: "bootstrap4",
-        ajax: {
-            url: "/api/cities",
-            dataType: "json",
-            delay: 250,
-            processResults: function (response) {
-                return {
-                    results: response
-                };
-            },
-            cache: true
-        }
+    $.get("/api/air-metrics", function(status, body){
+        console.log(body)
     });
 </script>
 

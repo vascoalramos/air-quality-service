@@ -21,7 +21,7 @@ public class CityCollection {
     }
 
     public List<City> getAllCities() {
-        return this.cities;
+        return this.cities.stream().limit(20).collect(Collectors.toList());
     }
 
     public List<City> getCitiesContains(String query) {
