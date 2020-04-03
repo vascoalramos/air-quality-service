@@ -35,4 +35,24 @@ public class CityTest {
         City city2 = new City(2L, "Viseu", "PT", "Portugal");
         assertThat(city1.compareTo(city2)).isEqualTo(0);
     }
+
+    @Test
+    public void testEqual() {
+        City city1 = new City(1L, "Viseu", "PT", "Portugal");
+        City city2 = new City(2L, "Viseu", "PT", "Portugal");
+        assertThat(city1.equals(city2)).isTrue();
+    }
+
+    @Test
+    public void testEqualSameObject() {
+        City city1 = new City(1L, "Viseu", "PT", "Portugal");
+        assertThat(city1.equals(city1)).isTrue();
+    }
+
+    @Test
+    public void testEqualSameNotCity() {
+        City city1 = new City(1L, "Viseu", "PT", "Portugal");
+        Double doubleVal = 1.0;
+        assertThat(city1.equals(doubleVal)).isFalse();
+    }
 }

@@ -39,4 +39,20 @@ public class City implements Comparable<City> {
     public int compareTo(City city) {
         return this.name.compareToIgnoreCase(city.name);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof City)) {
+            return false;
+        }
+
+        City city = (City) obj;
+
+        // Compare the data members and return accordingly
+        return this.name.equals(city.name);
+    }
 }
