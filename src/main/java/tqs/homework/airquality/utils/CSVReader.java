@@ -18,7 +18,7 @@ public class CSVReader {
 
     public List<City> readFIle() {
 
-        String csvFile = "cities_20000.csv";
+        String csvFile = "cities_all.csv";
         String line = "";
         String cvsSplitBy = ",";
         List<City> cities = new ArrayList<>();
