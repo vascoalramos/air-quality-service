@@ -40,6 +40,5 @@ public class WeatherBitServiceTest {
         assertThat(service.getCurrentAirMetrics()).isInstanceOf(AirMetrics.class);
 
         reset(restTemplate);
-
     }
 }
