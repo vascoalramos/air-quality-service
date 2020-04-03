@@ -16,6 +16,9 @@ unit-test:
   stage: Test
   script:
     - mvn test
+  except:
+    - merge_requests
+    - master
 
 integration-test:
   stage: Test
