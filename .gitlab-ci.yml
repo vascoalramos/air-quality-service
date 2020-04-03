@@ -12,10 +12,18 @@ stages:
   - Analysis
   - Test
 
-test:
+unit-test:
   stage: Test
   script:
     - mvn test
+
+integration-test:
+  stage: Test
+  script:
+    - mvn integration-test
+  only:
+    - merge_requests
+    - master
 
 sonarqube-check:
   stage: Analysis
