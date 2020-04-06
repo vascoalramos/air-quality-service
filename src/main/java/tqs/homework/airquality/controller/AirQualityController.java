@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import tqs.homework.airquality.cache.CacheSerializer;
 import tqs.homework.airquality.model.AirMetrics;
 import tqs.homework.airquality.service.AirQualityService;
 
@@ -36,5 +37,10 @@ public class AirQualityController {
         } else {
             return weatherBitService.getCurrentAirMetrics(cityId);
         }
+    }
+
+    @GetMapping("cache-statistics")
+    public CacheSerializer getCacheStatistics() {
+        return weatherBitService.getCacheStatistics();
     }
 }

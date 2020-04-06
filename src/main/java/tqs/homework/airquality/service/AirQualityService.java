@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import tqs.homework.airquality.cache.Cache;
+import tqs.homework.airquality.cache.CacheSerializer;
 import tqs.homework.airquality.model.AirMetrics;
 import tqs.homework.airquality.repository.BreezoMeeterRepository;
 import tqs.homework.airquality.repository.WeatherBitRepository;
@@ -19,6 +20,7 @@ import tqs.homework.airquality.repository.WeatherBitRepository;
 public class AirQualityService {
 
     private final Cache cache = new Cache(5 * 60L);
+    private final CacheSerializer cacheSerializer = new CacheSerializer(cache);
 
     @Autowired
     private WeatherBitRepository externalApi1;
@@ -62,5 +64,9 @@ public class AirQualityService {
 
         cache.storeRequest(key, result);
         return result;
+    }
+
+    public CacheSerializer getCacheStatistics() {
+        return cacheSerializer;
     }
 }

@@ -86,6 +86,17 @@ public class AirQualityControllerIT {
     }
 
     @Test
+    public void whenGetCache_thenReturnStatistics() throws Exception {
+        servlet.perform(get("/api/cache-statistics")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("numberOfRequests").isNumber())
+                .andExpect(jsonPath("numberOfHits").isNumber())
+                .andExpect(jsonPath("numberOfMisses").isNumber());
+
+    }
+
+    @Test
     public void whenGetCarWithInvalidIdAndDay_thenReturnCar() throws Exception {
         servlet.perform(get("/api/air-metrics?city_id=" + 1L + "&day=" + "2020-0431")
                 .contentType(MediaType.APPLICATION_JSON))
