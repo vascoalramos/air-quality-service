@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import tqs.homework.airquality.model.AirMetrics;
-import tqs.homework.airquality.service.WeatherBitService;
+import tqs.homework.airquality.service.AirQualityService;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.BDDMockito.given;
@@ -28,11 +28,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(AirQualityController.class)
 public class AirQualityControllerTest {
 
+    private long CITY_ID = 2732265L;
+
     @Autowired
     private MockMvc servlet;
 
     @MockBean
-    private WeatherBitService service;
+    private AirQualityService service;
 
     @Test
     public void whenGetCar_thenReturnCar() throws Exception {
@@ -40,9 +42,10 @@ public class AirQualityControllerTest {
         ObjectMapper mapper = new ObjectMapper();
         AirMetrics response = mapper.readValue(sampleJson, AirMetrics.class);
 
-        given(service.getCurrentAirMetrics()).willReturn(response);
+        given(service.getCurrentAirMetrics(CITY_ID)).willReturn(response);
 
-        servlet.perform(get("/api/air-metrics").contentType(MediaType.APPLICATION_JSON))
+        servlet.perform(get("/api/air-metrics?city_id=" +  CITY_ID)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("lat", is(response.getLat())))
                 .andExpect(jsonPath("lon", is(response.getLon())))
@@ -51,7 +54,7 @@ public class AirQualityControllerTest {
                 .andExpect(jsonPath("city_name", is(response.getCity_name())))
                 .andExpect(jsonPath("state_code", is(response.getState_code())));
 
-        verify(service, VerificationModeFactory.times(1)).getCurrentAirMetrics();
+        verify(service, VerificationModeFactory.times(1)).getCurrentAirMetrics(CITY_ID);
         reset(service);
     }
 }

@@ -3,9 +3,10 @@ package tqs.homework.airquality.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tqs.homework.airquality.model.AirMetrics;
-import tqs.homework.airquality.service.WeatherBitService;
+import tqs.homework.airquality.service.AirQualityService;
 
 /**
  * @author Vasco Ramos
@@ -18,10 +19,10 @@ import tqs.homework.airquality.service.WeatherBitService;
 public class AirQualityController {
 
     @Autowired
-    private WeatherBitService weatherBitService;
+    private AirQualityService weatherBitService;
 
     @GetMapping("/air-metrics")
-    public AirMetrics getAirMetrics() {
-        return weatherBitService.getCurrentAirMetrics();
+    public AirMetrics getAirMetrics(@RequestParam(value = "city_id", required = false) Long city_id) {
+        return weatherBitService.getCurrentAirMetrics(city_id);
     }
 }

@@ -1,5 +1,7 @@
 package tqs.homework.airquality.model;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @time 12:44
  */
 
+@Getter
 public class Data implements Serializable {
     private double aqi;
     private double o3;
@@ -17,31 +20,4 @@ public class Data implements Serializable {
     private double pm10;
     private double pm25;
 
-    public double getAqi() {
-        return aqi;
-    }
-
-    public double getO3() {
-        return o3;
-    }
-
-    public double getSo2() {
-        return so2;
-    }
-
-    public double getNo2() {
-        return no2;
-    }
-
-    public double getCo() {
-        return co;
-    }
-
-    public double getPm10() {
-        return pm10;
-    }
-
-    public double getPm25() {
-        return pm25;
-    }
 }

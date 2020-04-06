@@ -13,8 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CityTest {
 
-
-
     @Test
     public void testCompareToGreater() {
         City city1 = new City(1L, "Viseu,PT", "Portugal");

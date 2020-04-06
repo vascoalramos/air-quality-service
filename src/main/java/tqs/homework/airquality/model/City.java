@@ -1,5 +1,6 @@
 package tqs.homework.airquality.model;
 
+import lombok.Getter;
 import lombok.Setter;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Setter;
  */
 
 @Setter
+@Getter
 public class City implements Comparable<City> {
     private long id;
     private String text;
@@ -21,18 +23,6 @@ public class City implements Comparable<City> {
         this.id = cityId;
         this.text = text;
         this.country = country;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public long getId() {
-        return id;
     }
 
     @Override

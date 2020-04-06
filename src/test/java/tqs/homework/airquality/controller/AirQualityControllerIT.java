@@ -25,6 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class AirQualityControllerIT {
 
+    private long CITY_ID = 2732265L;
+
     @Autowired
     private MockMvc servlet;
 
@@ -34,7 +36,8 @@ public class AirQualityControllerIT {
         ObjectMapper mapper = new ObjectMapper();
         AirMetrics response = mapper.readValue(sampleJson, AirMetrics.class);
 
-        servlet.perform(get("/api/air-metrics").contentType(MediaType.APPLICATION_JSON))
+        servlet.perform(get("/api/air-metrics?city_id=" + CITY_ID)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("lat", is(response.getLat())))
                 .andExpect(jsonPath("lon", is(response.getLon())))
