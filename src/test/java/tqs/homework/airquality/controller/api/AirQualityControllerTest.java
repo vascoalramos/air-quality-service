@@ -1,4 +1,4 @@
-package tqs.homework.airquality.controller;
+package tqs.homework.airquality.controller.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import tqs.homework.airquality.controller.api.AirQualityController;
 import tqs.homework.airquality.model.AirMetrics;
 import tqs.homework.airquality.service.AirQualityService;
 
