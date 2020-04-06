@@ -31,10 +31,8 @@ public class WeatherBitRepository {
                 cache.storeRequest(cityIdString, result);
             }
             catch (Exception ex) {
-                ex.printStackTrace();
             }
         }
-
 
         return result;
     }
