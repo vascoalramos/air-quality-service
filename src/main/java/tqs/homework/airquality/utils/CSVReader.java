@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 
 public class CSVReader {
-    private final static Logger logger = Logger.getLogger(CSVReader.class.getName());
+    private static final Logger logger = Logger.getLogger(CSVReader.class.getName());
 
 
     public List<City> readFIle() {

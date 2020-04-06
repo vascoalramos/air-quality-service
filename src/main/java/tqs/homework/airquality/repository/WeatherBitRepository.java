@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 @Repository
 public class WeatherBitRepository {
-    private final static Logger logger = Logger.getLogger(WeatherBitRepository.class.getName());
+    private static final Logger logger = Logger.getLogger(WeatherBitRepository.class.getName());
     private static final String BASE_URL = "https://api.weatherbit.io/v2.0/current/airquality";
     private static final String TOKEN = "0fc2afb40f3d46859bbb4b64f7ea7eb3";
 
