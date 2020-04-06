@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 
 @Repository
 public class BreezoMeeterRepository {
-    private static final Logger logger = Logger.getLogger(WeatherBitRepository.class.getName());
+    private static final Logger logger = Logger.getLogger(BreezoMeeterRepository.class.getName());
     private static final String BASE_URL = "https://api.breezometer.com/air-quality/v2/";
     private static final String TOKEN = "af63fcc516384a9fad810ec4e021a3a0";
 
@@ -81,9 +81,9 @@ public class BreezoMeeterRepository {
         airMetrics.setLon(Double.parseDouble(c.getLon()));
         airMetrics.setLat(Double.parseDouble(c.getLat()));
 
-        String[] city_info = c.getText().split(",");
-        airMetrics.setCity_name(city_info[0]);
-        airMetrics.setCountry_code(city_info[1]);
+        String[] cityInfo = c.getText().split(",");
+        airMetrics.setCity_name(cityInfo[0]);
+        airMetrics.setCountry_code(cityInfo[1]);
 
         return airMetrics;
     }
