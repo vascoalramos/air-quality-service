@@ -38,12 +38,29 @@ public class AirQualityService {
 
                 if (result == null) {
                     throw new ResponseStatusException(HttpStatus.FORBIDDEN,
-                            "Request not valid. Please check api token and city_id");
+                            "Request not valid. Please check api token or/and city_id or/and day");
                 }
             }
         }
 
         cache.storeRequest(cityIdString, result);
+        return result;
+    }
+
+    public AirMetrics getAirMetricsByDay(long cityId, String date) {
+        String key = cityId + "," + date;
+        AirMetrics result = cache.getRequest(key);
+
+        if (result == null) {
+            result = this.externalApi2.getMetricsByIdAndDay(cityId, date);
+
+            if (result == null) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                        "Request not valid. Please check api token and city_id");
+            }
+        }
+
+        cache.storeRequest(key, result);
         return result;
     }
 }

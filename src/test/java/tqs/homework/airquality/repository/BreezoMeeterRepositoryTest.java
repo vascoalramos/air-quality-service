@@ -30,4 +30,19 @@ public class BreezoMeeterRepositoryTest {
     public void whenGetCurrentAirMetricsInvalidId_thenReturnCorrectMetrics() {
         assertThat(repository.getCurrentMetricsById(1L)).isNull();
     }
+
+    @Test
+    public void whenGetAirMetricsValidIdAndDay_thenReturnCorrectMetrics() {
+        assertThat(repository.getMetricsByIdAndDay(CITY_ID, "2020-04-05")).isInstanceOf(AirMetrics.class);
+    }
+
+    @Test
+    public void whenGetAirMetricsValidIdAndInvalidDay_thenReturnCorrectMetrics() {
+        assertThat(repository.getMetricsByIdAndDay(CITY_ID, "2020-04-40")).isNull();
+    }
+
+    @Test
+    public void whenGetAirMetricsInvalidIdAndDay_thenReturnCorrectMetrics() {
+        assertThat(repository.getMetricsByIdAndDay(1L, "2020-04-40")).isNull();
+    }
 }

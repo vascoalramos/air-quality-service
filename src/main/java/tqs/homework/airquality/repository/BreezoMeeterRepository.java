@@ -37,7 +37,7 @@ public class BreezoMeeterRepository {
             City city = cityCollection.getCityById(cityId);
             String url = BASE_URL + "current-conditions" + "?lat=" + city.getLat() + "&lon=" + city.getLon()
                     + "&key=" + TOKEN + "&features=breezometer_aqi,pollutants_aqi_information&metadata=true";
-            ResponseEntity<String> response = this.restTemplate.getForEntity(url, String.class);
+            ResponseEntity<String> response = fetchInfo(url);
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 result = getAirMetricsResponse(response, city);
@@ -45,6 +45,7 @@ public class BreezoMeeterRepository {
                 throw new Exception("Something failed while fetching the request. Status code: "
                         + response.getStatusCode());
             }
+
         } catch (Exception ex) {
             logger.log(Level.WARNING, ex.toString());
         }
@@ -52,12 +53,46 @@ public class BreezoMeeterRepository {
         return result;
     }
 
+    public AirMetrics getMetricsByIdAndDay(long cityId, String date) {
+        AirMetrics result = null;
+        try {
+            City city = cityCollection.getCityById(cityId);
+            String url = BASE_URL + "historical/hourly" + "?lat=" + city.getLat() + "&lon=" + city.getLon()
+                    + "&start_datetime=" + date + "T12:00:00&end_datetime=" + date + "T13:00:00"
+                    + "&key=" + TOKEN + "&features=breezometer_aqi,pollutants_aqi_information&metadata=true";
+            ResponseEntity<String> response = fetchInfo(url);
+
+            if (response.getStatusCode() == HttpStatus.OK) {
+                result = getAirMetricsResponse(response, city);
+            } else {
+                throw new Exception("Something failed while fetching the request. Status code: "
+                        + response.getStatusCode());
+            }
+
+        } catch (Exception ex) {
+            logger.log(Level.WARNING, ex.toString());
+        }
+
+        return result;
+    }
+
+    private ResponseEntity<String> fetchInfo(String url) {
+        return this.restTemplate.getForEntity(url, String.class);
+    }
+
     private AirMetrics getAirMetricsResponse(ResponseEntity<String> response, City c) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
 
         JsonNode responseBody = mapper.readTree(response.getBody());
-        double aqi = responseBody.at("/data/indexes/baqi/aqi").asDouble();
-        JsonNode pollutants = responseBody.at("/data/pollutants");
+        JsonNode data = responseBody.at("/data");
+
+        if (data.isArray()) {
+            data = data.get(data.size() - 1);
+        }
+
+        double aqi = data.at("/indexes/baqi/aqi").asDouble();
+
+        JsonNode pollutants = data.at("/pollutants");
         double o3 = pollutants.at("/o3/aqi_information/baqi/aqi").asDouble();
         double co = pollutants.at("/co/aqi_information/baqi/aqi").asDouble();
         double no2 = pollutants.at("/no2/aqi_information/baqi/aqi").asDouble();

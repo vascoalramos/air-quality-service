@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tqs.homework.airquality.model.AirMetrics;
+import tqs.homework.airquality.repository.BreezoMeeterRepository;
 import tqs.homework.airquality.repository.WeatherBitRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,9 +25,13 @@ import static org.mockito.Mockito.when;
 public class AirQualityServiceTest {
 
     private static final long CITY_ID = 2732265L;
+    private static final String DAY = "2020-04-05";
 
     @Mock
-    private WeatherBitRepository repository;
+    private WeatherBitRepository repository1;
+
+    @Mock
+    private BreezoMeeterRepository repository2;
 
     @InjectMocks
     private AirQualityService service;
@@ -35,11 +40,22 @@ public class AirQualityServiceTest {
     public void whenGetAirMetrics_thenReturnCorrectMetrics() throws Exception {
         AirMetrics response = loadRequest();
 
-        when(repository.getMetrics(CITY_ID)).thenReturn(response);
+        when(repository1.getMetrics(CITY_ID)).thenReturn(response);
 
         assertThat(service.getCurrentAirMetrics(CITY_ID)).isInstanceOf(AirMetrics.class);
 
-        reset(repository);
+        reset(repository1);
+    }
+
+    @Test
+    public void whenGetAirMetricsByDay_thenReturnCorrectMetrics() throws Exception {
+        AirMetrics response = loadRequest();
+
+        when(repository2.getMetricsByIdAndDay(CITY_ID, DAY)).thenReturn(response);
+
+        assertThat(service.getAirMetricsByDay(CITY_ID, DAY)).isInstanceOf(AirMetrics.class);
+
+        reset(repository2);
     }
 
     private AirMetrics loadRequest() throws JsonProcessingException {
