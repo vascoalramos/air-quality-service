@@ -13,6 +13,7 @@ import tqs.homework.airquality.model.City;
 import tqs.homework.airquality.model.Data;
 import tqs.homework.airquality.utils.CityCollection;
 
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,10 +58,13 @@ public class BreezoMeeterRepository {
         AirMetrics result = null;
         try {
             City city = cityCollection.getCityById(cityId);
-            String url = BASE_URL + "historical/hourly" + "?lat=" + city.getLat() + "&lon=" + city.getLon()
+            String urlString = BASE_URL + "historical/hourly" + "?lat=" + city.getLat() + "&lon=" + city.getLon()
                     + "&start_datetime=" + date + "T12:00:00&end_datetime=" + date + "T13:00:00"
                     + "&key=" + TOKEN + "&features=breezometer_aqi,pollutants_aqi_information&metadata=true";
-            ResponseEntity<String> response = fetchInfo(url);
+
+            URL url = new URL(urlString);
+
+            ResponseEntity<String> response = fetchInfo(url.toString());
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 result = getAirMetricsResponse(response, city);

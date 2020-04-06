@@ -1,7 +1,9 @@
 package tqs.homework.airquality.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +13,9 @@ import tqs.homework.airquality.AirQualityApplication;
 import tqs.homework.airquality.model.AirMetrics;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AirQualityControllerIT {
 
     private static final long CITY_ID = 2732265L;
+    private static final String DAY = "2020-04-05";
 
     @Autowired
     private MockMvc servlet;
@@ -33,8 +39,7 @@ public class AirQualityControllerIT {
     @Test
     public void whenGetCar_thenReturnCar() throws Exception {
         String sampleJson = "{\"lat\":40.66101,\"lon\":-7.90971,\"timezone\":\"Europe/Lisbon\",\"city_name\":\"Viseu\",\"country_code\":\"PT\",\"state_code\":\"22\",\"data\":[{\"aqi\":34.0,\"o3\":74.0,\"so2\":1.16043,\"no2\":5.0,\"co\":342.548,\"pm10\":3.0,\"pm25\":2.89888}]}";
-        ObjectMapper mapper = new ObjectMapper();
-        AirMetrics response = mapper.readValue(sampleJson, AirMetrics.class);
+        AirMetrics response = loadRequest(sampleJson);
 
         servlet.perform(get("/api/air-metrics?city_id=" + CITY_ID)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -45,5 +50,51 @@ public class AirQualityControllerIT {
                 .andExpect(jsonPath("country_code", is(response.getCountry_code())))
                 .andExpect(jsonPath("city_name", is(response.getCity_name())))
                 .andExpect(jsonPath("state_code", is(response.getState_code())));
+    }
+
+    @Test
+    public void whenGetCarWithIdAndDay_thenReturnCar() throws Exception {
+        String sampleJson = "{\"lat\":40.66101,\"lon\":-7.90971,\"timezone\":null,\"city_name\":\"Viseu\",\"country_code\":\"PT\",\"state_code\":null,\"data\":[{\"aqi\":72.0,\"o3\":72.0,\"so2\":99.0,\"no2\":92.0,\"co\":99.0,\"pm10\":82.0,\"pm25\":80.0}]}";
+        AirMetrics response = loadRequest(sampleJson);
+
+        servlet.perform(get("/api/air-metrics?city_id=" + CITY_ID + "&day=" + DAY)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("lat", is(response.getLat())))
+                .andExpect(jsonPath("lon", is(response.getLon())))
+                .andExpect(jsonPath("timezone", is(response.getTimezone())))
+                .andExpect(jsonPath("country_code", is(response.getCountry_code())))
+                .andExpect(jsonPath("city_name", is(response.getCity_name())))
+                .andExpect(jsonPath("state_code", is(response.getState_code())));
+
+    }
+
+    @Test
+    public void whenGetCarWithInvalidIdAndValidDay_thenReturnCar() throws Exception {
+        servlet.perform(get("/api/air-metrics?city_id=" + 1L + "&day=" + DAY)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isForbidden());
+
+    }
+
+    @Test
+    public void whenGetCarWithValidIdAndInvalidDay_thenReturnCar() throws Exception {
+        servlet.perform(get("/api/air-metrics?city_id=" + CITY_ID + "&day=" + "2020-0405")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+
+    }
+
+    @Test
+    public void whenGetCarWithInvalidIdAndDay_thenReturnCar() throws Exception {
+        servlet.perform(get("/api/air-metrics?city_id=" + 1L + "&day=" + "2020-0431")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+
+    }
+
+    private AirMetrics loadRequest(String sampleJson) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(sampleJson, AirMetrics.class);
     }
 }

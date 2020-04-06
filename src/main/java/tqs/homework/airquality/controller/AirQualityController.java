@@ -24,19 +24,17 @@ public class AirQualityController {
     private AirQualityService weatherBitService;
 
     @GetMapping("/air-metrics")
-    public AirMetrics getAirMetrics(@RequestParam(value = "city_id", required = false) Long cityId,
+    public AirMetrics getAirMetrics(@RequestParam(value = "city_id") Long cityId,
                                     @RequestParam(value = "day", required = false) String day) {
 
-        if (cityId != null && day != null && !day.isEmpty()) {
+        if (day != null && !day.isEmpty()) {
             if (day.split("-").length != 3) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         "The value specified under the day parameter: " + day + " - is invalid");
             }
             return weatherBitService.getAirMetricsByDay(cityId, day);
-        } else if (cityId != null) {
-            return weatherBitService.getCurrentAirMetrics(cityId);
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing request parameters");
+            return weatherBitService.getCurrentAirMetrics(cityId);
         }
     }
 }
