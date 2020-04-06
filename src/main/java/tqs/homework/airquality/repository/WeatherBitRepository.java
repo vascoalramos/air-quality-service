@@ -6,6 +6,8 @@ import org.springframework.web.client.RestTemplate;
 import tqs.homework.airquality.cache.Cache;
 import tqs.homework.airquality.model.AirMetrics;
 
+import java.util.logging.Logger;
+
 /**
  * @author Vasco Ramos
  * @date 06/04/20
@@ -14,6 +16,7 @@ import tqs.homework.airquality.model.AirMetrics;
 
 @Repository
 public class WeatherBitRepository {
+    private final static Logger logger = Logger.getLogger(WeatherBitRepository.class.getName());
     private static final String BASE_URL = "https://api.weatherbit.io/v2.0/current/airquality";
     private static final String TOKEN = "0fc2afb40f3d46859bbb4b64f7ea7eb3";
 
@@ -31,6 +34,7 @@ public class WeatherBitRepository {
                 cache.storeRequest(cityIdString, result);
             }
             catch (Exception ex) {
+                logger.warning(ex.toString());
             }
         }
 

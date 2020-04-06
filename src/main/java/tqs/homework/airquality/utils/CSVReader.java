@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @author Vasco Ramos
@@ -15,6 +16,8 @@ import java.util.List;
  */
 
 public class CSVReader {
+    private final static Logger logger = Logger.getLogger(CSVReader.class.getName());
+
 
     public List<City> readFIle() {
 
@@ -26,10 +29,11 @@ public class CSVReader {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
                 String[] city = line.split(cvsSplitBy);
-                City cityObj = new City(Long.parseLong(city[0]), city[1]+","+city[3], city[4]);
+                City cityObj = new City(Long.parseLong(city[0]), city[1] + "," + city[3], city[4]);
                 cities.add(cityObj);
             }
-        } catch (IOException ignored) {
+        } catch (IOException ex) {
+            logger.warning(ex.toString());
         }
 
         return cities;
