@@ -18,7 +18,7 @@ public class WeatherBitRepository {
     private static String TOKEN = "0fc2afb40f3d46859bbb4b64f7ea7eb3";
 
     private final RestTemplate restTemplate = new RestTemplateBuilder().build();
-    private final Cache cache = new Cache(5*60);
+    private final Cache cache = new Cache(5*60L);
 
     public AirMetrics getMetrics(long cityId) {
         String cityIdString = String.valueOf(cityId);

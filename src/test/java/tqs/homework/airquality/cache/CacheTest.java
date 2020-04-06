@@ -22,7 +22,7 @@ public class CacheTest {
 
     @BeforeEach
     private void init() {
-        cache = new Cache(5*60);
+        cache = new Cache(5*60L);
 
         assertThat(cache.getNumberOfRequests()).isEqualTo(0);
         assertThat(cache.getNumberOfHits()).isEqualTo(0);

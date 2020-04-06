@@ -35,7 +35,6 @@ public class AirQualityServiceTest {
     public void whenGetAirMetrics_thenReturnCorrectMetrics() throws Exception {
         AirMetrics response = loadRequest();
 
-        String url = "https://api.weatherbit.io/v2.0/current/airquality?city_id=2732265&key=0fc2afb40f3d46859bbb4b64f7ea7eb3";
         when(repository.getMetrics(CITY_ID)).thenReturn(response);
 
         assertThat(service.getCurrentAirMetrics(CITY_ID)).isInstanceOf(AirMetrics.class);
