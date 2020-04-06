@@ -21,14 +21,14 @@ public class CityCollection {
     }
 
     public List<City> getAllCities() {
-        return this.cities.stream().limit(20).collect(Collectors.toList());
+        return this.cities.stream().limit(25).collect(Collectors.toList());
     }
 
     public List<City> getCitiesContains(String query) {
         String finalQuery = query.toLowerCase();
         return this.cities.stream()
                 .filter(city -> city.getText().toLowerCase().contains(finalQuery))
-                .limit(15)
+                .limit(25)
                 .collect(Collectors.toList());
     }
 }
