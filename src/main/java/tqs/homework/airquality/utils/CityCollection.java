@@ -31,4 +31,11 @@ public class CityCollection {
                 .limit(25)
                 .collect(Collectors.toList());
     }
+
+    public City getCityById(long id) {
+        return this.cities.stream()
+                .filter(city -> city.getId() == id)
+                .limit(1)
+                .collect(Collectors.toList()).get(0);
+    }
 }

@@ -29,7 +29,7 @@ public class CSVReader {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
                 String[] city = line.split(cvsSplitBy);
-                City cityObj = new City(Long.parseLong(city[0]), city[1] + "," + city[3], city[4]);
+                City cityObj = new City(Long.parseLong(city[0]), city[1]+","+city[3], city[4], city[5], city[6]);
                 cities.add(cityObj);
             }
         } catch (IOException ex) {

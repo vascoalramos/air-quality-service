@@ -15,22 +15,22 @@ public class CityTest {
 
     @Test
     public void testCompareToGreater() {
-        City city1 = new City(1L, "Viseu,PT", "Portugal");
-        City city2 = new City(2L, "Nelas,PT", "Portugal");
+        City city1 = new City(1L, "Viseu,PT", "Portugal", "222", "-1.2");
+        City city2 = new City(2L, "Nelas,PT", "Portugal", "222", "-1.2");
         assertThat(city1.compareTo(city2)).isGreaterThanOrEqualTo(1);
     }
 
     @Test
     public void testCompareToSmaller() {
-        City city1 = new City(1L, "Viseu,PT", "Portugal");
-        City city2 = new City(2L, "Nelas,PT", "Portugal");
+        City city1 = new City(1L, "Viseu,PT", "Portugal", "222", "-1.2");
+        City city2 = new City(2L, "Nelas,PT", "Portugal", "222", "-1.2");
         assertThat(city2.compareTo(city1)).isLessThanOrEqualTo(-1);
     }
 
     @Test
     public void testCompareToEqual() {
-        City city1 = new City(1L, "Viseu,PT", "Portugal");
-        City city2 = new City(2L, "Viseu,PT", "Portugal");
+        City city1 = new City(1L, "Viseu,PT", "Portugal", "222", "-1.2");
+        City city2 = new City(2L, "Viseu,PT", "Portugal", "222", "-1.2");
         assertThat(city1.compareTo(city2)).isEqualTo(0);
     }
 }

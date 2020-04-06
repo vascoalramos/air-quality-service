@@ -1,6 +1,7 @@
 package tqs.homework.airquality.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
  */
 
 @Getter
+@Setter
 public class AirMetrics implements Serializable {
 
     private double lat;

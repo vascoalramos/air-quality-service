@@ -32,8 +32,12 @@
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
-<script>
-    $.get("/api/air-metrics", function(status, body){
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let city_id = /*[[${city_id}]]*/;
+    /*]]>*/
+
+    $.get("/api/air-metrics?city_id=" + city_id, function(status, body){
         console.log(body)
     });
 </script>

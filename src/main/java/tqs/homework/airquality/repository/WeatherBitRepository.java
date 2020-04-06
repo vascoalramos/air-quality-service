@@ -1,11 +1,13 @@
 package tqs.homework.airquality.repository;
 
+import org.hibernate.event.spi.LoadEventListener;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 import tqs.homework.airquality.cache.Cache;
 import tqs.homework.airquality.model.AirMetrics;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -21,21 +23,15 @@ public class WeatherBitRepository {
     private static final String TOKEN = "0fc2afb40f3d46859bbb4b64f7ea7eb3";
 
     private final RestTemplate restTemplate = new RestTemplateBuilder().build();
-    private final Cache cache = new Cache(5*60L);
 
     public AirMetrics getMetrics(long cityId) {
-        String cityIdString = String.valueOf(cityId);
-        AirMetrics result = cache.getRequest(cityIdString);
-
-        if (result == null) {
-            try {
-                String url = BASE_URL + "?city_id=" + cityId + "&key=" + TOKEN;
-                result = this.restTemplate.getForObject(url, AirMetrics.class);
-                cache.storeRequest(cityIdString, result);
-            }
-            catch (Exception ex) {
-                logger.warning(ex.toString());
-            }
+        AirMetrics result = null;
+        try {
+            String url = BASE_URL + "?city_id=" + cityId + "&key=" + TOKEN;
+            result = this.restTemplate.getForObject(url, AirMetrics.class);
+        }
+        catch (Exception ex) {
+            logger.log(Level.WARNING, ex.toString());
         }
 
         return result;

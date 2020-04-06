@@ -11,24 +11,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author Vasco Ramos
  * @date 06/04/20
- * @time 13:20
+ * @time 18:05
  */
 
 @ExtendWith(MockitoExtension.class)
-public class WeatherBitRepositoryTest {
-
+public class BreezoMeeterRepositoryTest {
     private static  final long CITY_ID = 2732265L;
 
     @InjectMocks
-    private WeatherBitRepository repository;
+    private BreezoMeeterRepository repository;
 
     @Test
-    public void whenGetAirMetrics_thenReturnCorrectMetrics() {
-        assertThat(repository.getMetrics(CITY_ID)).isInstanceOf(AirMetrics.class);
+    public void whenGetCurrentAirMetricsValidId_thenReturnCorrectMetrics() {
+        assertThat(repository.getCurrentMetricsById(CITY_ID)).isInstanceOf(AirMetrics.class);
     }
 
     @Test
-    public void whenGetAirMetricsInvalidId_thenReturnCorrectMetrics() {
-        assertThat(repository.getMetrics(1L)).isNull();
+    public void whenGetCurrentAirMetricsInvalidId_thenReturnCorrectMetrics() {
+        assertThat(repository.getCurrentMetricsById(1L)).isNull();
     }
 }
