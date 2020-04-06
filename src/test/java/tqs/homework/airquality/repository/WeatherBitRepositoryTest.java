@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(MockitoExtension.class)
 public class WeatherBitRepositoryTest {
 
-    private long CITY_ID = 2732265L;
+    private static  final long CITY_ID = 2732265L;
 
     @InjectMocks
     private WeatherBitRepository repository;

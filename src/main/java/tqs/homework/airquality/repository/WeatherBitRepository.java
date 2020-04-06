@@ -14,8 +14,8 @@ import tqs.homework.airquality.model.AirMetrics;
 
 @Repository
 public class WeatherBitRepository {
-    private static String BASE_URL = "https://api.weatherbit.io/v2.0/current/airquality";
-    private static String TOKEN = "0fc2afb40f3d46859bbb4b64f7ea7eb3";
+    private static final String BASE_URL = "https://api.weatherbit.io/v2.0/current/airquality";
+    private static final String TOKEN = "0fc2afb40f3d46859bbb4b64f7ea7eb3";
 
     private final RestTemplate restTemplate = new RestTemplateBuilder().build();
     private final Cache cache = new Cache(5*60L);
@@ -25,10 +25,16 @@ public class WeatherBitRepository {
         AirMetrics result = cache.getRequest(cityIdString);
 
         if (result == null) {
-            String url = BASE_URL + "?city_id=" + cityId + "&key=" + TOKEN;
-            result = this.restTemplate.getForObject(url, AirMetrics.class);
-            cache.storeRequest(cityIdString, result);
+            try {
+                String url = BASE_URL + "?city_id=" + cityId + "&key=" + TOKEN;
+                result = this.restTemplate.getForObject(url, AirMetrics.class);
+                cache.storeRequest(cityIdString, result);
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
+
 
         return result;
     }

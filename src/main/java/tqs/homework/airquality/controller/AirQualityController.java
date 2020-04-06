@@ -22,7 +22,7 @@ public class AirQualityController {
     private AirQualityService weatherBitService;
 
     @GetMapping("/air-metrics")
-    public AirMetrics getAirMetrics(@RequestParam(value = "city_id", required = false) Long city_id) {
-        return weatherBitService.getCurrentAirMetrics(city_id);
+    public AirMetrics getAirMetrics(@RequestParam(value = "city_id", required = false) Long cityId) {
+        return weatherBitService.getCurrentAirMetrics(cityId);
     }
 }

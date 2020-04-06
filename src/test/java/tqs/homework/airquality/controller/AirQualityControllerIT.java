@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class AirQualityControllerIT {
 
-    private long CITY_ID = 2732265L;
+    private static final long CITY_ID = 2732265L;
 
     @Autowired
     private MockMvc servlet;

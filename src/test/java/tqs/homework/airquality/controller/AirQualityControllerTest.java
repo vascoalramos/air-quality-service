@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(AirQualityController.class)
 public class AirQualityControllerTest {
 
-    private long CITY_ID = 2732265L;
+    private static final long CITY_ID = 2732265L;
 
     @Autowired
     private MockMvc servlet;

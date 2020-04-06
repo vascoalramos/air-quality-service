@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CacheTest {
 
-    private String CITY_ID = "2732265";
+    private static final String CITY_ID = "2732265";
 
     private Cache cache;
 
