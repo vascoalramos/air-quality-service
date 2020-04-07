@@ -212,10 +212,14 @@
                 cache: true
             }
         });
+
+        if ($('#preloader').length) {
+            $('#preloader').fadeOut('slow', function() {
+                $(this).remove();
+            });
+        }
     });
 </script>
-
-
 
 
 </body>

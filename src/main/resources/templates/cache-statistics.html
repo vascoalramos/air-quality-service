@@ -136,11 +136,18 @@
 
 <script th:inline="javascript">
     $(document).ready(function () {
-        $.get("/api/cache-statistics", function (response) {
-            $("#total-requests").text(response["numberOfRequests"]);
-            $("#total-hits").text(response["numberOfHits"]);
-            $("#total-misses").text(response["numberOfMisses"]);
-        });
+        $.get("/api/cache-statistics")
+            .done(function () {
+                $("#total-requests").text(response["numberOfRequests"]);
+                $("#total-hits").text(response["numberOfHits"]);
+                $("#total-misses").text(response["numberOfMisses"]);
+
+                if ($('#preloader').length) {
+                    $('#preloader').fadeOut('slow', function() {
+                        $(this).remove();
+                    });
+                }
+            });
     });
 </script>
 
