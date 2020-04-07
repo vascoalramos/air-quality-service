@@ -137,7 +137,7 @@
 <script th:inline="javascript">
     $(document).ready(function () {
         $.get("/api/cache-statistics")
-            .done(function () {
+            .done(function (response) {
                 $("#total-requests").text(response["numberOfRequests"]);
                 $("#total-hits").text(response["numberOfHits"]);
                 $("#total-misses").text(response["numberOfMisses"]);

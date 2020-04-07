@@ -182,6 +182,12 @@
 
 <script th:inline="javascript">
     $(document).ready(function () {
+        if ($('#preloader').length) {
+            $('#preloader').fadeOut('slow', function() {
+                $(this).remove();
+            });
+        }
+
         $("#city").change(function () {
             $("#submit").prop("disabled", !($("#day").val() && $("#city").val()));
         });
@@ -212,12 +218,6 @@
                 cache: true
             }
         });
-
-        if ($('#preloader').length) {
-            $('#preloader').fadeOut('slow', function() {
-                $(this).remove();
-            });
-        }
     });
 </script>
 
