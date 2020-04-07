@@ -2,10 +2,8 @@ package tqs.homework.airquality.controller.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
-import tqs.homework.airquality.AirQualityApplication;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -18,24 +16,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @time 11:38
  */
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = AirQualityApplication.class)
-@AutoConfigureMockMvc
-public class IndexControllerIT {
+@WebMvcTest(AirMetricsByDayController.class)
+public class AirMetricsByDayControllerTest {
 
     @Autowired
     private MockMvc servlet;
 
     @Test
-    public void testGetRequest() throws Exception {
-        this.servlet.perform(get("/"))
+    public void testListProducts() throws Exception {
+        this.servlet.perform(get("/by-day"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("index"));
-    }
-
-    @Test
-    public void testPostRequest() throws Exception {
-        this.servlet.perform(post("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("air-metrics"));
+                .andExpect(view().name("by-day"));
     }
 }

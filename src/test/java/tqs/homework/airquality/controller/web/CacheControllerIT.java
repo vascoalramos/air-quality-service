@@ -8,7 +8,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import tqs.homework.airquality.AirQualityApplication;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -20,22 +19,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = AirQualityApplication.class)
 @AutoConfigureMockMvc
-public class IndexControllerIT {
+public class CacheControllerIT {
 
     @Autowired
     private MockMvc servlet;
 
     @Test
     public void testGetRequest() throws Exception {
-        this.servlet.perform(get("/"))
+        this.servlet.perform(get("/cache-statistics"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("index"));
-    }
-
-    @Test
-    public void testPostRequest() throws Exception {
-        this.servlet.perform(post("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("air-metrics"));
+                .andExpect(view().name("cache-statistics"));
     }
 }

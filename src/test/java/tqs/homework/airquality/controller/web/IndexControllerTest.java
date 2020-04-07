@@ -7,6 +7,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import tqs.homework.airquality.controller.web.IndexController;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -26,5 +27,12 @@ public class IndexControllerTest {
         this.servlet.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"));
+    }
+
+    @Test
+    public void testPostRequest() throws Exception {
+        this.servlet.perform(post("/"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("air-metrics"));
     }
 }

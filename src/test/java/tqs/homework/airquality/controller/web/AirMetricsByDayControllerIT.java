@@ -20,22 +20,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = AirQualityApplication.class)
 @AutoConfigureMockMvc
-public class IndexControllerIT {
+public class AirMetricsByDayControllerIT {
 
     @Autowired
     private MockMvc servlet;
 
     @Test
     public void testGetRequest() throws Exception {
-        this.servlet.perform(get("/"))
+        this.servlet.perform(get("/by-day"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("index"));
-    }
-
-    @Test
-    public void testPostRequest() throws Exception {
-        this.servlet.perform(post("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("air-metrics"));
+                .andExpect(view().name("by-day"));
     }
 }
