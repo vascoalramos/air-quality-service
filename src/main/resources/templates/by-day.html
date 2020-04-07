@@ -180,42 +180,43 @@
 <script th:src="@{assets/select2-develop/dist/js/select2.full.js}"></script>
 <script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
 
-<script>
-    $("#city").change(function(){
-        $("#submit").prop("disabled", !($("#day").val() && $("#city").val()));
-    });
+<script th:inline="javascript">
+    $(document).ready(function () {
+        $("#city").change(function () {
+            $("#submit").prop("disabled", !($("#day").val() && $("#city").val()));
+        });
 
-    $("#day").change(function(){
-        $("#submit").prop("disabled", !($("#day").val() && $("#city").val()));
+        $("#day").change(function () {
+            $("#submit").prop("disabled", !($("#day").val() && $("#city").val()));
+        });
+
+        $('.input-group.date').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true,
+            endDate: "0d",
+            startDate: "-29d",
+        });
+
+        $("#city").select2({
+            theme: "bootstrap4",
+            ajax: {
+                url: "/api/cities",
+                dataType: "json",
+                delay: 250,
+                processResults: function (response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
     });
 </script>
 
-<script>
-    $('.input-group.date').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        todayHighlight: true,
-        endDate: "0d",
-        startDate: "-29d",
-    });
-</script>
 
-<script>
-    $("#city").select2({
-        theme: "bootstrap4",
-        ajax: {
-            url: "/api/cities",
-            dataType: "json",
-            delay: 250,
-            processResults: function (response) {
-                return {
-                    results: response
-                };
-            },
-            cache: true
-        }
-    });
-</script>
+
 
 </body>
 

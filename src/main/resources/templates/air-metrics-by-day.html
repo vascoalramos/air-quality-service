@@ -172,17 +172,35 @@
     let day = /*[[${day}]]*/;
     /*]]>*/
 
-    $.get("/api/air-metrics?city_id=" + city_id + "&day=" + day, function (response) {
-        let data = response["data"][0];
-        $("#city").text(response["city_name"] + ", " + response["country_code"]);
-        $("#aqi").text(data["aqi"]);
-        $("#co").text(data["co"]);
-        $("#no2").text(data["no2"]);
-        $("#o3").text(data["o3"]);
-        $("#so2").text(data["so2"]);
-        $("#pm10").text(data["pm10"]);
-        $("#pm25").text(data["pm25"]);
-    });
+    $(document).ready(function () {
+        $(".section-title").hide();
+        $("#metrics-div").hide();
+
+        $.get("/api/air-metrics?city_id=" + city_id + "&day=" + day)
+            .done(function (response) {
+                let data = response["data"][0];
+                $("#city").text(response["city_name"] + ", " + response["country_code"]);
+                $("#aqi").text(data["aqi"]);
+                $("#co").text(data["co"]);
+                $("#no2").text(data["no2"]);
+                $("#o3").text(data["o3"]);
+                $("#so2").text(data["so2"]);
+                $("#pm10").text(data["pm10"]);
+                $("#pm25").text(data["pm25"]);
+
+                if ($('#preloader').length) {
+                    $('#preloader').fadeOut('slow', function() {
+                        $(this).remove();
+                    });
+                }
+
+                $(".section-title").show();
+                $("#metrics-div").show();
+            })
+            .fail(function () {
+            });
+        ;
+    })
 </script>
 
 </body>

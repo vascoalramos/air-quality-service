@@ -135,10 +135,12 @@
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
 <script th:inline="javascript">
-    $.get("/api/cache-statistics", function (response) {
-        $("#total-requests").text(response["numberOfRequests"]);
-        $("#total-hits").text(response["numberOfHits"]);
-        $("#total-misses").text(response["numberOfMisses"]);
+    $(document).ready(function () {
+        $.get("/api/cache-statistics", function (response) {
+            $("#total-requests").text(response["numberOfRequests"]);
+            $("#total-hits").text(response["numberOfHits"]);
+            $("#total-misses").text(response["numberOfMisses"]);
+        });
     });
 </script>
 
