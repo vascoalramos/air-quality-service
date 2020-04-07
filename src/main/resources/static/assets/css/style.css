@@ -427,7 +427,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 24px;
 }
 
-#hero .btn-get-started {
+.btn-get-started {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -440,11 +440,11 @@ h1, h2, h3, h4, h5, h6 {
   background: #1acc8d;
 }
 
-#hero .btn-get-started:hover {
-  background: #17b57d;
+.btn-get-started:hover {
+  background: #17b57d !important;
 }
 
-#hero .animated {
+.animated {
   animation: up-down 2s ease-in-out infinite alternate-reverse both;
 }
 

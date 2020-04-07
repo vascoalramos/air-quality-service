@@ -32,6 +32,7 @@
 
     <!-- Template Main CSS File -->
     <link th:href="@{assets/css/style.css}" th:rel="stylesheet">
+    <link th:href="@{assets/page404/style.css}" th:rel="stylesheet"/>
 
 </head>
 
@@ -61,6 +62,19 @@
     <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts mt-5 pt-5" style="background-color: white">
         <div class="container">
+
+            <div id="notfound">
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h1>Error</h1>
+                    </div>
+                    <h2>We are sorry, error while fetching!</h2>
+                    <p>The metrics you are looking for are temporarily unavailable.</p>
+                    <div class="text-center text-lg-center">
+                        <a href="/">Back To Homepage</a>
+                    </div>
+                </div>
+            </div>
 
             <div class="section-title" data-aos="fade-up">
                 <h2 style="font-size: 30px; font-weight: bolder" id="city"></h2>
@@ -174,6 +188,7 @@
     $(document).ready(function () {
         $(".section-title").hide();
         $("#metrics-div").hide();
+        $("#notfound").hide();
 
         $.get("/api/air-metrics?city_id=" + city_id)
             .done(function (response) {
@@ -187,19 +202,18 @@
                 $("#pm10").text(data["pm10"]);
                 $("#pm25").text(data["pm25"]);
 
+                $(".section-title").show();
+                $("#metrics-div").show();
+            })
+            .fail(function () {
+                $("#notfound").show();
+            })
+            .always(function () {
                 if ($('#preloader').length) {
-                    $('#preloader').fadeOut('slow', function() {
+                    $('#preloader').fadeOut('slow', function () {
                         $(this).remove();
                     });
                 }
-
-                $(".section-title").show();
-                $("#metrics-div").show();
-
-            })
-            .fail(function () {
-                $(".section-title").hide();
-                $("#metrics-div").hide();
             });
     });
 </script>
