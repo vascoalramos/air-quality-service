@@ -14,7 +14,7 @@ import tqs.homework.airquality.model.City;
  */
 
 @Controller
-@RequestMapping({ "/", "/index" })
+@RequestMapping({"/", "/index", "/by-city"})
 public class IndexController {
 
     @GetMapping
@@ -24,7 +24,7 @@ public class IndexController {
     }
 
     @PostMapping
-    public String save(City city, Model model) {
+    public String showMetrics(City city, Model model) {
         model.addAttribute("city_id", city.getText());
         return "air-metrics";
     }

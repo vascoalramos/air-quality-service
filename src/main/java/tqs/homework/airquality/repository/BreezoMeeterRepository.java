@@ -59,7 +59,7 @@ public class BreezoMeeterRepository {
         try {
             City city = cityCollection.getCityById(cityId);
             String urlString = BASE_URL + "historical/hourly" + "?lat=" + city.getLat() + "&lon=" + city.getLon()
-                    + "&start_datetime=" + date + "T12:00:00&end_datetime=" + date + "T13:00:00"
+                    + "&start_datetime=" + date + "T00:00:00&end_datetime=" + date + "T01:00:00"
                     + "&key=" + TOKEN + "&features=breezometer_aqi,pollutants_aqi_information&metadata=true";
 
             URL url = new URL(urlString);

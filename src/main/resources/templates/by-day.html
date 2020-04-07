@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Air Quality Web App</title>
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link th:href="@{assets/img/favicon.png}" th:rel="icon">
+    <link th:href="@{assets/img/apple-touch-icon.png}" th:rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}" th:rel="stylesheet">
+    <link th:href="@{assets/vendor/icofont/icofont.min.css}" th:rel="stylesheet">
+    <link th:href="@{assets/vendor/boxicons/css/boxicons.min.css}" th:rel="stylesheet">
+    <link th:href="@{assets/vendor/venobox/venobox.css}" th:rel="stylesheet">
+    <link th:href="@{assets/vendor/remixicon/remixicon.css}" th:rel="stylesheet">
+    <link th:href="@{assets/vendor/owl.carousel/assets/owl.carousel.min.css}" th:rel="stylesheet">
+    <link th:href="@{assets/vendor/aos/aos.css}" th:rel="stylesheet">
+
+    <link th:href="@{assets/select2-develop/dist/css/select2.css}" th:rel="stylesheet"/>
+    <link th:href="@{assets/select2-bootstrap4-theme-master/dist/select2-bootstrap4.css}" th:rel="stylesheet"/>
+    <link th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}" th:rel="stylesheet"/>
+    <link th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}" th:rel="stylesheet"/>
+    <link th:href="@{webjars/bootstrap/4.4.1-1/css/bootstrap.min.css} " th:rel="stylesheet"/>
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{assets/css/style.css}" th:rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+
+        <div class="logo mr-auto">
+            <h1 class="text-light"><a href="/"><span>Air Quality App</span></a></h1>
+        </div>
+
+        <nav class="nav-menu d-none d-lg-block">
+            <ul>
+                <li><a th:href="@{/}">By City</a></li>
+                <li><a class="active" th:href="@{by-day}">By Day</a></li>
+                <li><a th:href="@{cache-statistics}">Cache Statistics</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header><!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 pt-5 mt-5 align-items-center">
+                <form method="post" th:object="${keys}">
+
+                    <div class="form-group row">
+                        <div class="col-md-8 mt-5">
+                            <label for="city"></label>
+                            <select class="form-control select2-single" id="city" th:field="*{city.text}">
+                                <option value="">Search city</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mt-5">
+                            <label for="day"></label>
+                            <div class="input-group date">
+                                <input type="text" class="form-control" placeholder="Search Day" id="day"
+                                       autocomplete="off" th:field="*{day}"/>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="icofont-ui-calendar"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center text-lg-center">
+                        <button class="btn-get-started scrollto" id="submit" type="submit" disabled>Submit form</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-waves">
+        <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" class="wave">
+            <defs></defs>
+            <path id="wave1" d=""/>
+        </svg>
+        <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" class="wave">
+            <defs></defs>
+            <path id="wave2" d=""/>
+        </svg>
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+        <div class="container">
+
+            <div class="section-title" data-aos="fade-up">
+                <h2>Features</h2>
+                <p>Check The Features</p>
+            </div>
+
+            <div class="row" data-aos="fade-left">
+                <div class="col-lg-4">
+                    <div class="icon-box" data-aos="zoom-in" data-aos-delay="50">
+                        <i class="icofont-search-map" style="color: #ffbb2c;"></i>
+                        <h3><a href="">Air Metrics By City</a></h3>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-4 mt-md-0">
+                    <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
+                        <i class="icofont-ui-calendar" style="color: #5578ff;"></i>
+                        <h3><a href="">Air Metrics By City and Day</a></h3>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-4 mt-md-0">
+                    <div class="icon-box" data-aos="zoom-in" data-aos-delay="150">
+                        <i class="icofont-pie-chart" style="color: #e80368;"></i>
+                        <h3><a href="">Cache Statistics</a></h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Features Section -->
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" style="position: absolute; bottom: 0; width: 100%;">
+    <div class="container">
+        <div class="copyright">
+            &copy; 2020 - Developed with <i class="icofont-rocket" style="font-size: 1rem"></i>
+            by <strong><a style="color: white" href="https://vascoalramos.me/" title="Portfolio | Vasco Ramos"
+                          target="_blank" rel="noopener noreferrer">Vasco Ramos</a></strong>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script th:src="@{assets/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{assets/vendor/jquery.easing/jquery.easing.min.js}"></script>
+<script th:src="@{assets/vendor/php-email-form/validate.js}"></script>
+<script th:src="@{assets/vendor/venobox/venobox.min.js}"></script>
+<script th:src="@{assets/vendor/waypoints/jquery.waypoints.min.js}"></script>
+<script th:src="@{assets/vendor/counterup/counterup.min.js}"></script>
+<script th:src="@{assets/vendor/owl.carousel/owl.carousel.min.js}"></script>
+<script th:src="@{assets/vendor/TweenMax/TweenMax.min.js}"></script>
+<script th:src="@{assets/vendor/wavify/wavify.js}"></script>
+<script th:src="@{assets/vendor/aos/aos.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{assets/js/main.js}"></script>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{assets/select2-develop/dist/js/select2.full.js}"></script>
+<script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+<script>
+    $("#city").change(function(){
+        $("#submit").prop("disabled", !($("#day").val() && $("#city").val()));
+    });
+
+    $("#day").change(function(){
+        $("#submit").prop("disabled", !($("#day").val() && $("#city").val()));
+    });
+</script>
+
+<script>
+    $('.input-group.date').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayHighlight: true,
+        endDate: "0d",
+        startDate: "-29d",
+    });
+</script>
+
+<script>
+    $("#city").select2({
+        theme: "bootstrap4",
+        ajax: {
+            url: "/api/cities",
+            dataType: "json",
+            delay: 250,
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
+        }
+    });
+</script>
+
+</body>
+
+</html>
