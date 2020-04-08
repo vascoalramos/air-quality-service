@@ -35,7 +35,7 @@ sonarqube-check:
     - mvn verify sonar:sonar -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.host.url=${SONAR_HOST_URL}
       -Dsonar.login=${SONAR_TOKEN} -Dsonar.organization=${ORGANIZATION}
       -Dsonar.qualitygate.wait=true
-      -'-Dtest=!%regex[.*UI.*]'
+      '-Dtest=!%regex[.*UI.*]'
 
   allow_failure: true
   only:
