@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tqs.homework.airquality.model.AirMetrics;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -22,7 +24,7 @@ public class CacheTest {
 
     @BeforeEach
     private void init() {
-        cache = new Cache(5*60L);
+        cache = new Cache(2L);
 
         assertThat(cache.getNumberOfRequests()).isEqualTo(0);
         assertThat(cache.getNumberOfHits()).isEqualTo(0);
@@ -47,6 +49,21 @@ public class CacheTest {
         assertThat(cache.getNumberOfRequests()).isEqualTo(1);
         assertThat(cache.getNumberOfHits()).isEqualTo(1);
         assertThat(cache.getNumberOfMisses()).isEqualTo(0);
+    }
+
+    @Test
+    public void whenRequestExpired_thenReturnsRequestAndIncrementsMisses() throws JsonProcessingException, InterruptedException {
+        AirMetrics request = loadRequest();
+        cache.storeRequest(CITY_ID, request);
+
+        // expiration time
+        TimeUnit.SECONDS.sleep(2);
+
+        assertThat(cache.getRequest(CITY_ID)).isNull();
+
+        assertThat(cache.getNumberOfRequests()).isEqualTo(1);
+        assertThat(cache.getNumberOfHits()).isEqualTo(0);
+        assertThat(cache.getNumberOfMisses()).isEqualTo(1);
     }
 
     private AirMetrics loadRequest() throws JsonProcessingException {
