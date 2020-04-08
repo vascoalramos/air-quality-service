@@ -57,7 +57,7 @@ public class CacheTest {
         cache.storeRequest(CITY_ID, request);
 
         // expiration time
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(3);
 
         assertThat(cache.getRequest(CITY_ID)).isNull();
 
