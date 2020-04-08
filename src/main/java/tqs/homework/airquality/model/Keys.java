@@ -16,6 +16,6 @@ import lombok.Setter;
 public class Keys {
 
     private City city;
-
     private String day;
+
 }

@@ -115,7 +115,7 @@ public class BreezoMeeterRepository {
         dataArray[0].setPm10(pm10);
         dataArray[0].setPm25(pm25);
 
-        airMetrics.setData(dataArray);
+        airMetrics.setMetrics(dataArray);
 
         airMetrics.setLon(Double.parseDouble(c.getLon()));
         airMetrics.setLat(Double.parseDouble(c.getLat()));

@@ -19,7 +19,7 @@ public class AirMetrics implements Serializable {
     private double lat;
     private double lon;
     private String timezone;
-    private Data[] data;
+
 
     @JsonProperty("city_name")
     private String cityName;
@@ -30,4 +30,6 @@ public class AirMetrics implements Serializable {
     @JsonProperty("state_code")
     private String stateCode;
 
+    @JsonProperty("data")
+    private Data[] metrics;
 }
