@@ -1,13 +1,5 @@
 image: maven:3.6.3-jdk-11
 
-variables:
-  PROJECT_KEY: "air-quality-service"
-  SONAR_TOKEN: "b3c05d385f6d359c36cb4d2de9e8631a9edef0bf"
-  SONAR_HOST_URL: "https://sonarcloud.io/"
-  GIT_DEPTH: 0
-  ORGANIZATION: "vasco"
-
-
 stages:
   - Analysis
   - Test
@@ -32,8 +24,8 @@ integration-test:
 sonarqube-check:
   stage: Analysis
   script:
-    - mvn -B -q verify sonar:sonar -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.host.url=${SONAR_HOST_URL}
-      -Dsonar.login=${SONAR_TOKEN} -Dsonar.organization=${ORGANIZATION}
+    - mvn -B -q verify sonar:sonar -Dsonar.projectKey=$PROJECT_KEY -Dsonar.host.url=$SONAR_HOST_URL
+      -Dsonar.login=$SONAR_TOKEN -Dsonar.organization=$ORGANIZATION
       -Dsonar.qualitygate.wait=true
       '-Dtest=!%regex[.*UI.*]'
 
