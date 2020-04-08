@@ -9,9 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,7 +24,7 @@ public class IndexTest {
 
     @BeforeEach
     public void setUp() throws MalformedURLException {
-        ChromeOptions capabilities =  new ChromeOptions();
+        ChromeOptions capabilities = new ChromeOptions();
         driver = new RemoteWebDriver(new URL("http://selenium__standalone-chrome:4444/wd/hub/"), capabilities);
     }
 
@@ -35,7 +35,7 @@ public class IndexTest {
 
     @Test
     public void testIndexUI() {
-        driver.get("http://127.0.0.1:8080/");
+        driver.get("https://tqs-air-quality-service.herokuapp.com/");
         driver.manage().window().setSize(new Dimension(1920, 985));
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
