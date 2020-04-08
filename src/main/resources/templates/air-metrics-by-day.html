@@ -78,7 +78,7 @@
             </div>
 
             <div class="section-title" data-aos="fade-up">
-                <h2 style="font-size: 30px; font-weight: bolder" id="city"></h2>
+                <h2 style="font-size: 30px; font-weight: bolder" id="city_text"></h2>
                 <p class="mt-2" style="font-size: 13px">Analyse some metrics concerning the city's air quality</p>
             </div>
 
@@ -195,7 +195,7 @@
         $.get("/api/air-metrics?city_id=" + city_id + "&day=" + day)
             .done(function (response) {
                 let data = response["data"][0];
-                $("#city").text(response["city_name"] + ", " + response["country_code"]);
+                $("#city_text").text(response["city_name"] + ", " + response["country_code"]);
                 $("#aqi").text(data["aqi"]);
                 $("#co").text(data["co"]);
                 $("#no2").text(data["no2"]);
