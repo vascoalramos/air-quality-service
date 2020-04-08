@@ -32,7 +32,7 @@ public class IndexUITest {
         driver.get("http://127.0.0.1:8080/");
         driver.manage().window().setSize(new Dimension(1920, 985));
         {
-            WebDriverWait wait = new WebDriverWait(driver, 30);
+            WebDriverWait wait = new WebDriverWait(driver, 90);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("select2-city-container")));
         }
         driver.findElement(By.id("select2-city-container")).click();
@@ -43,7 +43,7 @@ public class IndexUITest {
         }
         driver.findElement(By.id("submit")).click();
         {
-            WebDriverWait wait = new WebDriverWait(driver, 30);
+            WebDriverWait wait = new WebDriverWait(driver, 90);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("city_text")));
         }
         assertThat(driver.findElement(By.id("city_text")).getText(), is("COMUGNE, IT"));

@@ -43,7 +43,7 @@ public class BreezoMeeterRepository {
             if (response.getStatusCode() == HttpStatus.OK) {
                 result = getAirMetricsResponse(response, city);
             } else {
-                throw new Exception("Something failed while fetching the request. Status code: "
+                throw new IllegalStateException("Something failed while fetching the request. Status code: "
                         + response.getStatusCode());
             }
 
@@ -69,7 +69,7 @@ public class BreezoMeeterRepository {
             if (response.getStatusCode() == HttpStatus.OK) {
                 result = getAirMetricsResponse(response, city);
             } else {
-                throw new Exception("Something failed while fetching the request. Status code: "
+                throw new IllegalStateException("Something failed while fetching the request. Status code: "
                         + response.getStatusCode());
             }
 

@@ -32,7 +32,7 @@ public class CacheMetricsUITest {
         driver.get("http://127.0.0.1:8080/");
         driver.manage().window().setSize(new Dimension(1920, 985));
         {
-            WebDriverWait wait = new WebDriverWait(driver, 30);
+            WebDriverWait wait = new WebDriverWait(driver, 90);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Cache Statistics")));
         }
         driver.findElement(By.linkText("Cache Statistics")).click();
@@ -47,7 +47,7 @@ public class CacheMetricsUITest {
         assertThat(driver.findElement(By.cssSelector(".col-lg-12 b")).getText(), is("Total Requests"));
         driver.findElement(By.linkText("Air Quality App")).click();
         {
-            WebDriverWait wait = new WebDriverWait(driver, 30);
+            WebDriverWait wait = new WebDriverWait(driver, 90);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".col-lg-4:nth-child(3) a")));
         }
         driver.findElement(By.cssSelector(".col-lg-4:nth-child(3) a")).click();

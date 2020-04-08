@@ -33,7 +33,7 @@ public class AirMetricsByDayUITest {
         driver.manage().window().setSize(new Dimension(1920, 985));
         driver.findElement(By.linkText("By Day")).click();
         {
-            WebDriverWait wait = new WebDriverWait(driver, 30);
+            WebDriverWait wait = new WebDriverWait(driver, 90);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("select2-city-container")));
         }
         driver.findElement(By.id("select2-city-container")).click();
@@ -46,7 +46,7 @@ public class AirMetricsByDayUITest {
         driver.findElement(By.cssSelector(".today:nth-child(4)")).click();
         driver.findElement(By.id("submit")).click();
         {
-            WebDriverWait wait = new WebDriverWait(driver, 30);
+            WebDriverWait wait = new WebDriverWait(driver, 90);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("city_text")));
         }
         assertThat(driver.findElement(By.id("city_text")).getText(), is("COMUGNE, IT"));
