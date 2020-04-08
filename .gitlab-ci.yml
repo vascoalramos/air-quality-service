@@ -20,7 +20,7 @@ stages:
 unit-test:
   stage: Test
   script:
-    - mvn test
+    - mvn -B test
   except:
     - merge_requests
     - master
@@ -36,7 +36,7 @@ integration-test:
 sonarqube-check:
   stage: Analysis
   script:
-    - mvn verify sonar:sonar -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.host.url=${SONAR_HOST_URL}
+    - mvn -B -q verify sonar:sonar -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.host.url=${SONAR_HOST_URL}
       -Dsonar.login=${SONAR_TOKEN} -Dsonar.organization=${ORGANIZATION}
       -Dsonar.qualitygate.wait=true
       '-Dtest=!%regex[.*UI.*]'
