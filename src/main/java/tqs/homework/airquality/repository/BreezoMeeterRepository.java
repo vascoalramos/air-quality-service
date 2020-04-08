@@ -121,8 +121,8 @@ public class BreezoMeeterRepository {
         airMetrics.setLat(Double.parseDouble(c.getLat()));
 
         String[] cityInfo = c.getText().split(",");
-        airMetrics.setCity_name(cityInfo[0]);
-        airMetrics.setCountry_code(cityInfo[1]);
+        airMetrics.setCityName(cityInfo[0]);
+        airMetrics.setCountryCode(cityInfo[1]);
 
         return airMetrics;
     }

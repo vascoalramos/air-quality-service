@@ -43,9 +43,9 @@ public class AirQualityControllerIT {
                 .andExpect(jsonPath("lat", is(response.getLat())))
                 .andExpect(jsonPath("lon", is(response.getLon())))
                 .andExpect(jsonPath("timezone", is(response.getTimezone())))
-                .andExpect(jsonPath("country_code", is(response.getCountry_code())))
-                .andExpect(jsonPath("city_name", is(response.getCity_name())))
-                .andExpect(jsonPath("state_code", is(response.getState_code())));
+                .andExpect(jsonPath("country_code", is(response.getCountryCode())))
+                .andExpect(jsonPath("city_name", is(response.getCityName())))
+                .andExpect(jsonPath("state_code", is(response.getStateCode())));
     }
 
     @Test
@@ -59,9 +59,9 @@ public class AirQualityControllerIT {
                 .andExpect(jsonPath("lat", is(response.getLat())))
                 .andExpect(jsonPath("lon", is(response.getLon())))
                 .andExpect(jsonPath("timezone", is(response.getTimezone())))
-                .andExpect(jsonPath("country_code", is(response.getCountry_code())))
-                .andExpect(jsonPath("city_name", is(response.getCity_name())))
-                .andExpect(jsonPath("state_code", is(response.getState_code())));
+                .andExpect(jsonPath("country_code", is(response.getCountryCode())))
+                .andExpect(jsonPath("city_name", is(response.getCityName())))
+                .andExpect(jsonPath("state_code", is(response.getStateCode())));
 
     }
 
