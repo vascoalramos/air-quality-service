@@ -24,7 +24,7 @@ unit-test:
 integration-test:
   stage: Test
   script:
-    - mvn integration-test '-Dtest=!%regex[.*UI.*]'
+    - mvn -B integration-test '-Dtest=!%regex[.*UI.*]'
   only:
     - merge_requests
     - master
