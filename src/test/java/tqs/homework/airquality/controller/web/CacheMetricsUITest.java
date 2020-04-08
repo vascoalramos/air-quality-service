@@ -63,4 +63,40 @@ public class CacheMetricsUITest {
         assertThat(driver.findElement(By.cssSelector(".col-lg-12 b")).getText(), is("Total Requests"));
         assertThat(driver.findElement(By.cssSelector("h2")).getText(), is("CACHE STATISTICS"));
     }
+
+    public static class IndexUITest {
+
+        private WebDriver driver;
+
+        @BeforeEach
+        public void setUp() {
+            driver = new ChromeDriver();
+        }
+
+        @AfterEach
+        public void tearDown() {
+            driver.quit();
+        }
+
+        @Test
+        public void indexUITest() {
+            driver.get("http://127.0.0.1:8080/");
+            driver.manage().window().setSize(new Dimension(1920, 985));
+            assertThat(driver.findElement(By.cssSelector("a > span")).getText(), is("Air Quality App"));
+            assertThat(driver.findElement(By.linkText("By City")).getText(), is("By City"));
+            assertThat(driver.findElement(By.linkText("By Day")).getText(), is("By Day"));
+            assertThat(driver.findElement(By.linkText("Cache Statistics")).getText(), is("Cache Statistics"));
+            assertThat(driver.findElement(By.id("select2-city-container")).getText(), is("Search city"));
+            {
+                WebDriverWait wait = new WebDriverWait(driver, 30);
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h2")));
+            }
+            assertThat(driver.findElement(By.cssSelector("h2")).getText(), is("FEATURES"));
+            assertThat(driver.findElement(By.cssSelector("p")).getText(), is("CHECK THE FEATURES"));
+            assertThat(driver.findElement(By.linkText("Air Metrics By City")).getText(), is("Air Metrics By City"));
+            assertThat(driver.findElement(By.linkText("Air Metrics By City and Day")).getText(), is("Air Metrics By City and Day"));
+            assertThat(driver.findElement(By.cssSelector(".col-lg-4:nth-child(3) a")).getText(), is("Cache Statistics"));
+            assertThat(driver.findElement(By.cssSelector(".copyright")).getText(), is("© 2020 - Developed with by Vasco Ramos"));
+        }
+    }
 }
