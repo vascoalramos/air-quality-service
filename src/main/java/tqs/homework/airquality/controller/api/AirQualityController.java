@@ -28,7 +28,7 @@ public class AirQualityController {
     public AirMetrics getAirMetrics(@RequestParam(value = "city_id") Long cityId,
                                     @RequestParam(value = "day", required = false) String day) {
 
-        if (day != null && !day.isEmpty()) {
+        if (day != null) {
             if (day.split("-").length != 3) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         "The value specified under the day parameter: " + day + " - is invalid");

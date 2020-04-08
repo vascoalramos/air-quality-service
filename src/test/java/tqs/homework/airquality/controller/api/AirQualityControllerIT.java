@@ -100,6 +100,14 @@ public class AirQualityControllerIT {
 
     }
 
+    @Test
+    public void whenGetCarWithEmptyDay_thenReturnCar() throws Exception {
+        servlet.perform(get("/api/air-metrics?city_id=" + CITY_ID + "&day= ")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+
+    }
+
     private AirMetrics loadRequest(String sampleJson) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(sampleJson, AirMetrics.class);
