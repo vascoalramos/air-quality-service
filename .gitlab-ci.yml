@@ -1,5 +1,9 @@
 image: maven:3.6.3-jdk-11
 
+services:
+  - name: selenium/standalone-chrome:latest
+    alias: gitlab-selenium-server
+
 variables:
   PROJECT_KEY: "air-quality-service"
   SONAR_TOKEN: "b3c05d385f6d359c36cb4d2de9e8631a9edef0bf"
