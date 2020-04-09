@@ -5,10 +5,26 @@ stages:
   - Test
   - Deploy
 
+sonarqube-check:
+  stage: Analysis
+  script:
+    - mvn -B -q verify sonar:sonar -Dsonar.projectKey=$PROJECT_KEY -Dsonar.host.url=$SONAR_HOST_URL
+      -Dsonar.login=$SONAR_TOKEN -Dsonar.organization=$ORGANIZATION
+      -Dsonar.qualitygate.wait=true
+      '-Dtest=!%regex[.*UI.*]'
+  allow_failure: true
+  only:
+    - master
+
 unit-test:
   stage: Test
   script:
     - mvn -B test
+  artifacts:
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
   except:
     - merge_requests
     - master
@@ -17,20 +33,13 @@ integration-test:
   stage: Test
   script:
     - mvn -B integration-test '-Dtest=!%regex[.*UI.*]'
+  artifacts:
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
   only:
     - merge_requests
-    - master
-
-sonarqube-check:
-  stage: Analysis
-  script:
-    - mvn -B -q verify sonar:sonar -Dsonar.projectKey=$PROJECT_KEY -Dsonar.host.url=$SONAR_HOST_URL
-      -Dsonar.login=$SONAR_TOKEN -Dsonar.organization=$ORGANIZATION
-      -Dsonar.qualitygate.wait=true
-      '-Dtest=!%regex[.*UI.*]'
-
-  allow_failure: true
-  only:
     - master
 
 production:
