@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tqs.homework.airquality.model.City;
-import tqs.homework.airquality.utils.CityCollection;
+import tqs.homework.airquality.model.CityCollection;
 
 import java.util.List;
 

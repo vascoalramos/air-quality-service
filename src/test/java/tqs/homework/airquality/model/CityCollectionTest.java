@@ -1,7 +1,6 @@
-package tqs.homework.airquality.utils;
+package tqs.homework.airquality.model;
 
 import org.junit.jupiter.api.Test;
-import tqs.homework.airquality.model.City;
 
 import java.util.List;
 

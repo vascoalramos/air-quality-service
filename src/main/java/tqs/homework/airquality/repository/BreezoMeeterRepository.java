@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import tqs.homework.airquality.model.AirMetrics;
 import tqs.homework.airquality.model.City;
 import tqs.homework.airquality.model.Data;
-import tqs.homework.airquality.utils.CityCollection;
+import tqs.homework.airquality.model.CityCollection;
 
 import java.net.URL;
 import java.util.logging.Level;
