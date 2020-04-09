@@ -22,7 +22,7 @@ import tqs.homework.airquality.service.AirQualityService;
 public class AirQualityController {
 
     @Autowired
-    private AirQualityService weatherBitService;
+    private AirQualityService airQualityService;
 
     @GetMapping("/air-metrics")
     public AirMetrics getAirMetrics(@RequestParam(value = "city_id") Long cityId,
@@ -33,14 +33,14 @@ public class AirQualityController {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         "The value specified under the day parameter: " + day + " - is invalid");
             }
-            return weatherBitService.getAirMetricsByDay(cityId, day);
+            return airQualityService.getAirMetricsByDay(cityId, day);
         } else {
-            return weatherBitService.getCurrentAirMetrics(cityId);
+            return airQualityService.getCurrentAirMetrics(cityId);
         }
     }
 
     @GetMapping("cache-statistics")
     public Cache getCacheStatistics() {
-        return weatherBitService.getCacheStatistics();
+        return airQualityService.getCacheStatistics();
     }
 }
