@@ -39,7 +39,7 @@ public class AirQualityControllerTest {
     private AirQualityService service;
 
     @Test
-    public void whenGetCar_thenReturnCar() throws Exception {
+    public void whenGetMetrics_thenReturnMetrics() throws Exception {
         AirMetrics response = loadRequest();
 
         given(service.getCurrentAirMetrics(CITY_ID)).willReturn(response);
@@ -58,7 +58,7 @@ public class AirQualityControllerTest {
     }
 
     @Test
-    public void whenGetCarWithIdAndDay_thenReturnCar() throws Exception {
+    public void whenGetMetricsWithIdAndDay_thenReturnMetrics() throws Exception {
         AirMetrics response = loadRequest();
 
         given(service.getAirMetricsByDay(CITY_ID, DAY)).willReturn(response);

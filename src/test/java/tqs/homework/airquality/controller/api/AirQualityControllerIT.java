@@ -33,7 +33,7 @@ public class AirQualityControllerIT {
     private MockMvc servlet;
 
     @Test
-    public void whenGetCar_thenReturnCar() throws Exception {
+    public void whenGetMetrics_thenReturnMetrics() throws Exception {
         String sampleJson = "{\"lat\":40.66101,\"lon\":-7.90971,\"timezone\":\"Europe/Lisbon\",\"city_name\":\"Viseu\",\"country_code\":\"PT\",\"state_code\":\"22\",\"data\":[{\"aqi\":34.0,\"o3\":74.0,\"so2\":1.16043,\"no2\":5.0,\"co\":342.548,\"pm10\":3.0,\"pm25\":2.89888}]}";
         AirMetrics response = loadRequest(sampleJson);
 
@@ -49,7 +49,7 @@ public class AirQualityControllerIT {
     }
 
     @Test
-    public void whenGetCarWithIdAndDay_thenReturnCar() throws Exception {
+    public void whenGetMetricsWithIdAndDay_thenReturnMetrics() throws Exception {
         String sampleJson = "{\"lat\":40.66101,\"lon\":-7.90971,\"timezone\":null,\"city_name\":\"Viseu\",\"country_code\":\"PT\",\"state_code\":null,\"data\":[{\"aqi\":72.0,\"o3\":72.0,\"so2\":99.0,\"no2\":92.0,\"co\":99.0,\"pm10\":82.0,\"pm25\":80.0}]}";
         AirMetrics response = loadRequest(sampleJson);
 
@@ -66,7 +66,7 @@ public class AirQualityControllerIT {
     }
 
     @Test
-    public void whenGetCarWithInvalidIdAndValidDay_thenReturnCar() throws Exception {
+    public void whenGetMetricsWithInvalidIdAndValidDay_thenIsForbidden() throws Exception {
         servlet.perform(get("/api/air-metrics?city_id=" + 1L + "&day=" + DAY)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isForbidden());
@@ -74,7 +74,7 @@ public class AirQualityControllerIT {
     }
 
     @Test
-    public void whenGetCarWithValidIdAndInvalidDay_thenReturnCar() throws Exception {
+    public void whenGetMetricsWithValidIdAndInvalidDay_thenIsBadRequest() throws Exception {
         servlet.perform(get("/api/air-metrics?city_id=" + CITY_ID + "&day=" + "2020-0405")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
@@ -93,7 +93,7 @@ public class AirQualityControllerIT {
     }
 
     @Test
-    public void whenGetCarWithInvalidIdAndDay_thenReturnCar() throws Exception {
+    public void whenGetMetricsWithInvalidIdAndDay_thenIsBadRequest() throws Exception {
         servlet.perform(get("/api/air-metrics?city_id=" + 1L + "&day=" + "2020-0431")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
@@ -101,7 +101,7 @@ public class AirQualityControllerIT {
     }
 
     @Test
-    public void whenGetCarWithEmptyDay_thenReturnCar() throws Exception {
+    public void whenGetMetricsWithEmptyDay_thenIsBadRequest() throws Exception {
         servlet.perform(get("/api/air-metrics?city_id=" + CITY_ID + "&day= ")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
