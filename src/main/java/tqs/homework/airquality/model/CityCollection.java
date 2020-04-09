@@ -1,6 +1,5 @@
 package tqs.homework.airquality.model;
 
-import tqs.homework.airquality.model.City;
 import tqs.homework.airquality.utils.CSVReader;
 
 import java.util.ArrayList;

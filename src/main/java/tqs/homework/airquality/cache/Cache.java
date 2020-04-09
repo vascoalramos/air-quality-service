@@ -1,5 +1,6 @@
 package tqs.homework.airquality.cache;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import tqs.homework.airquality.model.AirMetrics;
 
 import java.util.HashMap;
@@ -12,12 +13,16 @@ import java.util.Map;
  */
 
 public class Cache {
-    private Map<String, AirMetrics> requests;
-    private Map<String, Long> requestsExpiration;
     private long timeToLive;
     private int numberOfRequests;
     private int numberOfHits;
     private int numberOfMisses;
+
+    @JsonIgnore
+    private Map<String, AirMetrics> requests;
+
+    @JsonIgnore
+    private Map<String, Long> requestsExpiration;
 
     public Cache(long defaultExpire) {
         this.requests = new HashMap<>();
